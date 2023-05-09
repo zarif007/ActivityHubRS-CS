@@ -20,12 +20,16 @@ const RegisterActivity = () => {
   return (
     <div className={styles.wrapper}>
       <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+
+        {/* G Suite taker input */}
         <div className="my-3">
           <label className={styles.label}>
             G-Suite <span className="text-red-500 text-lg">*</span>
           </label>
           <Input placeholder="***@g.bracu.ac.bd" required />
         </div>
+
+        {/* Phone number taker input */}
         <div className="my-3">
           <label className={styles.label}>
             Phone Number <span className="text-red-500 text-lg">*</span>
@@ -33,6 +37,7 @@ const RegisterActivity = () => {
           <Input placeholder="01********" required />
         </div>
 
+        {/* Activity taker dropdown */}
         <div className="my-3">
           <label className={styles.label}>
             Select an Activity <span className="text-red-500 text-lg">*</span>
@@ -50,6 +55,7 @@ const RegisterActivity = () => {
           </select>
         </div>
 
+        {/* T/C taker checkbox */}
         <div className="flex items-center space-x-2">
           <input type="checkbox" className="w-4 h-4 text-blue-500 " />
           <label htmlFor="radio-button" className={styles.label}>
@@ -57,6 +63,7 @@ const RegisterActivity = () => {
           </label>
         </div>
 
+        {/* Confirmation button */}
         <button className={`${styles.button}`}>
           <p>Confirm</p>
           <HiArrowRight />

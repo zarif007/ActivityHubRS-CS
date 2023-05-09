@@ -14,6 +14,8 @@ export default function Home() {
   }
   return (
     <main className={styles.wrapper}>
+
+      {/* button groups */}
       <button className={styles.button} onClick={() => router.push('/activities')}>
         <GiStairsGoal className="w-8 h-8" />
         <p>View activities</p>

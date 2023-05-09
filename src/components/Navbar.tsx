@@ -19,7 +19,11 @@ const Navbar = () => {
 
   return (
     <div className={styles.wrapper}>
+
+      {/* Logo */}
       <Image src="/impact.png" className="cursor-pointer" height="60" width="60" alt="logo" onClick={() => router.push('/')} />
+
+      {/* Options on Navbar */}
       <div className="flex space-x-3 md:space-x-8">
         <h1 className={styles.optionStyles} onClick={() => router.push('/activities')} >
           <GiStairsGoal />
@@ -30,6 +34,7 @@ const Navbar = () => {
           <p>Register</p>
         </h1>
       </div>
+      
     </div>
   );
 };
