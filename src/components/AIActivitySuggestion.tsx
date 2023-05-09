@@ -80,4 +80,5 @@ function generatePrompt(prompt: string) {
     activity:`;
 }
 
+
 export default AIActivitySuggestion;
