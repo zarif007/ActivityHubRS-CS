@@ -5,6 +5,7 @@ import { colorSchema } from "@/lib/ColorSchema";
 import React from "react";
 import { HiArrowRight } from "react-icons/hi";
 import { FiCornerRightDown } from "react-icons/fi";
+import allActivities from "@/components/temp_getactivities";
 
 const RegisterActivity = () => {
   const styles = {
@@ -17,6 +18,8 @@ const RegisterActivity = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+
 
   return (
     <div className={styles.wrapper}>
@@ -48,12 +51,14 @@ const RegisterActivity = () => {
             Select an Activity <span className="text-red-500 text-lg">*</span>
           </label>
           <select id="large" className={styles.select}>
-            <option></option>
-            <option value="US">Web dev biggener sec 1</option>
-            <option value="CA">Web dev biggener sec 2</option>
-            <option value="FR">Web dev Advance sec 1</option>
-            <option value="DE">App dev sec 1</option>
-            <option value="DE">Game dev sec 1</option>
+            <option>Select Activity</option>
+            
+            {
+              allActivities.map((activity) => (
+                <option key={activity.name} value={activity.name}>{activity.name}</option>
+              ))
+            }
+
           </select>
         </div>
 
