@@ -5,7 +5,7 @@ import { colorSchema } from "@/lib/ColorSchema";
 import React from "react";
 import { HiArrowRight } from "react-icons/hi";
 import { FiCornerRightDown } from "react-icons/fi";
-import allActivities from "@/components/temp_getactivities";
+import allActivities from "@/lib/temp_getactivities";
 
 const RegisterActivity = () => {
   const styles = {

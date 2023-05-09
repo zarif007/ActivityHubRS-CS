@@ -27,14 +27,14 @@ const Navbar = () => {
       <div className="flex space-x-3 md:space-x-8">
         <h1 className={styles.optionStyles} onClick={() => router.push('/activities')} >
           <GiStairsGoal />
-          <p className="">Activities</p>
+          <p>Activities</p>
         </h1>
         <h1 className={styles.optionStyles} onClick={() => router.push('/registeractivity')} >
           <BiLogIn />
           <p>Register</p>
         </h1>
       </div>
-      
+
     </div>
   );
 };

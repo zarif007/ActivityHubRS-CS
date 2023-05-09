@@ -70,4 +70,29 @@ const allActivities = [
   
   ]
 
+export const stringifiedList = `
+    1. Dance 
+    2. Glass Painting 
+    3. Guiter playing- Beginner level 
+    4. Drawing and Skecting Beginner level 
+    5. Drawing and Skecting Advance level 
+    6. Painting/ Folk art 
+    7. Youth Leadership 
+    8. Basics of Robotics 
+    9. App Development 
+    10. Animated Film Making - Beginner Level 
+    11. Martial art
+    12. Presentation Skills Section-1 
+    13. Presentation Skills Section-2 
+    14. German Language 
+    15. France Language 
+    16. Japanese Language Section-1 
+    17. Zumba 
+    18. Taekwondo
+    19. Yoga & Meditation 
+    20. Yoga & Meditation 
+    21. Amra Notun Network Morning 
+    22. Amra Notun Network Evening 
+    `
+
 export default allActivities;
