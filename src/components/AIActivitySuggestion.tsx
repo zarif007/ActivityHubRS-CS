@@ -27,7 +27,7 @@ const AIActivitySuggestion = () => {
 
     try {
       const result = await openai.createCompletion({
-        model: "text-davinci-002",
+        model: "text-davinci-003",
         prompt: generatePrompt(prompt),
         temperature: 0.6,
       });
@@ -52,7 +52,7 @@ const AIActivitySuggestion = () => {
           disabled={loading || prompt.length === 0}
           type="submit"
         >
-          {loading ? "Generating..." : "Generate"}
+          {loading ? "Finding..." : "Find"}
         </button>
 
         {apiResponse !== "" && !loading && (
@@ -70,7 +70,7 @@ const AIActivitySuggestion = () => {
 function generatePrompt(prompt: string) {
   const capitalizedPrompt =
     prompt[0].toUpperCase() + prompt.slice(1).toLowerCase();
-  return `Suggest me an activity based on this list ${stringifiedList}.
+  return `Suggest me an activity from this list ${stringifiedList}.
     
     Domain: I Love to paint
     activity: Painting/ Folk art 
