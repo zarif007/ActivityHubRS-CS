@@ -21,7 +21,7 @@ const Navbar = () => {
     <div className={styles.wrapper}>
 
       {/* Logo */}
-      <Image src="/impact.png" className="cursor-pointer" height="60" width="60" alt="logo" onClick={() => router.push('/')} />
+      <Image src="/logo.png" className="cursor-pointer" height="60" width="60" alt="logo" onClick={() => router.push('/')} />
 
       {/* Options on Navbar */}
       <div className="flex space-x-3 md:space-x-8">
