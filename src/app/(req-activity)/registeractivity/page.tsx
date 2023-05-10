@@ -55,7 +55,7 @@ const RegisterActivity = () => {
             
             {
               allActivities.map((activity) => (
-                <option key={activity.name} value={activity.name}>{activity.name}</option>
+                <option key={activity.Name} value={activity.Name }>{activity.Name+ " -> " + activity["Class time"]}</option>
               ))
             }
 
