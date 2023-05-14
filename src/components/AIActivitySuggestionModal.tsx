@@ -77,7 +77,6 @@ const AIActivitySuggestionModal = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                
                 <Dialog.Panel className={styles.wrapper}>
                   <div className="w-full">
                     <form
