@@ -6,19 +6,17 @@ import { Fragment, useState } from "react";
 import { Input } from "./ui/Input";
 import { colorSchema } from "@/lib/ColorSchema";
 import { stringifiedList } from "@/lib/temp_getactivities";
+import { BsRobot } from "react-icons/bs";
 
-const AIActivitySuggestionModal = ({
-  isOpen,
-  setIsOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const AIActivitySuggestionModal = () => {
   const styles = {
-    wrapper: `flex space-y-4 w-full max-w-xl rounded flex-col items-center justify-center py-12 mx-2 border-2 border-gray-700`,
+    wrapper: `flex bg-gray-900 space-y-4 w-full max-w-xl rounded flex-col items-center justify-center py-12 mx-2 border-2 border-gray-700`,
     label: `leading-7 text-sm text-gray-400`,
     button: `${colorSchema.button} cursor-pointer mt-8 flex py-3 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   });
@@ -48,6 +46,15 @@ const AIActivitySuggestionModal = ({
 
   return (
     <>
+      <div
+        className="flex justify-end font-bold text-md md:text-lg text-indigo-500 cursor-pointer space-x-2 items-center mx-2"
+        onClick={() => setIsOpen(true)}
+      >
+        <p className="no-underline hover:underline decoration-indigo-500">
+          Let AI chose for you
+        </p>
+        <BsRobot className="w-8 h-8" />
+      </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
