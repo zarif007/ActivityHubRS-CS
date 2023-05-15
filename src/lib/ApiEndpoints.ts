@@ -1,0 +1,1 @@
+export const apiEndpointV1 = 'https://rsbackend.skillsnai.xyz/api/v1';

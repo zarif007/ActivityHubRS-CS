@@ -1,7 +1,10 @@
 import AIActivitySuggestionModal from "@/components/AIActivitySuggestionModal";
-import { domain } from "@/lib/Domain";
+import { colorSchema } from "@/lib/ColorSchema";
+import { apiEndpointV1 } from "@/lib/ApiEndpoints";
+import { ActivityInterface } from "@/types/activity";
 import axios from "axios";
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -10,9 +13,15 @@ export const metadata: Metadata = {
   description: "App for generating APIs with Fake data"
 }
 
+const d = 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.'
+
 const Activities = async () => {
 
-  const activities = await axios.get(`${domain}/activity`)
+  const styles = {
+    button: `${colorSchema.button} mt-2 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
+  };
+
+  const activities = await axios.get(`${apiEndpointV1}/activity`)
 
   if(!activities) return notFound()
 
@@ -34,7 +43,7 @@ const Activities = async () => {
           </div>
           <div className="flex flex-wrap -m-4">
             {
-              activities.data.data.length > 0 && activities.data.data.map((activity: any, index: number) => {
+              activities.data.data.length > 0 && activities.data.data.map((activity: ActivityInterface, index: number) => {
                 return (
                   <div key={index} className="xl:w-1/4 md:w-1/2 p-4">
                     <div className="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
@@ -45,15 +54,18 @@ const Activities = async () => {
                         style={{ objectFit: 'contain' }}
                       />
                       <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font">
-                        SUBTITLE
+                        {activity.day} - {activity.classTime}
                       </h3>
-                      <h2 className="text-lg text-white font-medium title-font mb-4">
-                        San Francisco
-                      </h2>
-                      <p className="leading-relaxed text-base">
-                        Fingerstache flexitarian street art 8-bit waistcoat.
-                        Distillery hexagon disrupt edison bulbche.
+                      <Link href={`/activities/${activity._id}`} >
+                        <div className="text-lg text-white font-medium title-font mb-4 h-12">
+                          {activity.name}
+                        </div>
+                      </Link>
+                      <p className="leading-relaxed text-base h-20">
+                        {activity.description.slice(0, 60)}...
                       </p>
+
+                      <Link href={`/activities/${activity._id}`} className={styles.button} >Details</Link>
                     </div>
                   </div>
                 )
