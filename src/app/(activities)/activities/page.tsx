@@ -24,13 +24,12 @@ const Activities = async () => {
   const activities = await axios.get(`${apiEndpointV1}/activity`)
 
   if(!activities) return notFound()
-
-  console.log('data', activities.data.data)
   
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
       
       <AIActivitySuggestionModal />
+
       <section className="text-gray-400 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap w-full mb-20">
@@ -45,7 +44,7 @@ const Activities = async () => {
             {
               activities.data.data.length > 0 && activities.data.data.map((activity: ActivityInterface, index: number) => {
                 return (
-                  <div key={index} className="xl:w-1/4 md:w-1/2 p-4">
+                  <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
                     <div className="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
                       <img
                         className="h-40 rounded w-full object-cover object-center mb-6"
@@ -53,8 +52,8 @@ const Activities = async () => {
                         alt="Activity Image"
                         style={{ objectFit: 'contain' }}
                       />
-                      <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font">
-                        {activity.day} - {activity.classTime}
+                      <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+                        {activity.day}({activity.classTime})
                       </h3>
                       <Link href={`/activities/${activity._id}`} >
                         <div className="text-lg text-white font-medium title-font mb-4 h-12">
