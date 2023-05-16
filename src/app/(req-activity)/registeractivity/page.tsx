@@ -136,7 +136,7 @@ const RegisterActivity = () => {
     try {
       // Checking if there is any student with this email
       const studentRes = await axios.get(
-        `${apiEndpointV1}/student/email/${registrationInputs.email}`
+        `${apiEndpointV1}/student/byEmail/${registrationInputs.email}`
       );
 
       if (studentRes.data.data === null) {
@@ -146,7 +146,7 @@ const RegisterActivity = () => {
 
       // Checking if this user already registered or not
       const isAlreadyRegistered = await axios.get(
-        `${apiEndpointV1}/registration/?studentId=${studentRes.data.data._id}`
+        `${apiEndpointV1}/registration/byStudentId/${studentRes.data.data._id}`
       );
 
       if (isAlreadyRegistered.data.data.length !== 0) {
