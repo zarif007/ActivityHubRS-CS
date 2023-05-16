@@ -9,11 +9,9 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Fake API || Dashboard",
-  description: "App for generating APIs with Fake data"
+  title: "RS Activity || Activities",
+  description: "Rs Activities"
 }
-
-const d = 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.'
 
 const Activities = async () => {
 

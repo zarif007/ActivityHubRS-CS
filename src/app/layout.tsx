@@ -3,6 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Colorhydration from '@/components/Colorhydration'
 import { colorSchema } from '@/lib/ColorSchema'
+import { Toaster } from '@/components/ui/Toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,8 @@ export default function RootLayout({
     <html lang="en" className={`${colorSchema.background}`}>
       <Colorhydration />
       <Navbar />
+
+      <Toaster position='bottom-center' />
       <body className={inter.className}>{children}</body>
     </html>
   )
