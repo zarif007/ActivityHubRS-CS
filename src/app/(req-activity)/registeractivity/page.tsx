@@ -228,7 +228,7 @@ const RegisterActivity = () => {
             <option value="">Select Activity</option>
             {activities.map((activity: ActivityInterface) => (
               <option key={activity._id} value={activity._id}>
-                {activity.name}
+                {activity.name} ({activity.day})
               </option>
             ))}
           </select>
