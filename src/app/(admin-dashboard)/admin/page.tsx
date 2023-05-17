@@ -1,8 +1,12 @@
 "use client";
 
+import { ActivityRegStudentTable } from "@/components/ActivityRegStudentTable.";
 import { Input } from "@/components/ui/Input";
+import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import { colorSchema } from "@/lib/ColorSchema";
-import React, { useState } from "react";
+import { RegistrationInterface } from "@/types/registration";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
   const styles = {
@@ -19,6 +23,8 @@ const AdminDashboard = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
 
+  const [registrationInfo, setRegistrationInfo] = useState<RegistrationInterface[]>([]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -29,9 +35,19 @@ const AdminDashboard = () => {
     } else {
         setError('Invalid Secret key')
     }
-
     setLoading(false);
   };
+
+  useEffect(() => {
+    if(!isAdmin) return;
+
+    const getInfo = async () => {
+      const res = await axios.get(`${apiEndpointV1}/registration`)
+      setRegistrationInfo(res.data.data)
+    }
+
+    getInfo()
+  }, [isAdmin])
 
   return (
     <div className={styles.wrapper}>
@@ -53,7 +69,10 @@ const AdminDashboard = () => {
           </button>
         </form>
       ) : (
-        <div>Admin</div>
+        <div className="w-full max-w-5xl">
+          <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
+          <ActivityRegStudentTable registrationInfo={registrationInfo} />
+        </div>
       )}
     </div>
   );

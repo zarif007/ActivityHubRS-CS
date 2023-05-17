@@ -62,37 +62,6 @@ const RegisterActivity = () => {
     getActivities();
   }, []);
 
-  // useEffect(() => {
-  //   const up = progressCounter;
-  //   if(registrationInputs.email !== '') {
-  //     up[1] = Math.min(1, progressCounter[1] + 1);
-  //   } else {
-  //     up[1] = Math.max(0, progressCounter[1] - 1);
-  //   }
-
-  //   if(registrationInputs.activityId !== '') {
-  //     up[2] = Math.min(1, progressCounter[2] + 1);
-  //   } else {
-  //     up[2] = Math.max(0, progressCounter[2] - 1);
-  //   }
-    
-  //   if(registrationInputs.phoneNumber !== '') {
-  //     up[3] = Math.min(1, progressCounter[3] + 1);
-  //   } else {
-  //     up[3] = Math.max(0, progressCounter[3] - 1);
-  //   }
-
-  //   if(isTCChecked) {
-  //     up[4] = Math.min(1, progressCounter[4] + 1);
-  //   } else {
-  //     up[4] = Math.max(0, progressCounter[4] - 1);
-  //   }
-
-  //   up[0] = up[1] + up[2] + up[3] + up[4] + 1;
-  //   console.log(up)
-  //   setProgressCounter(up);
-  // }, [registrationInputs, isTCChecked])
-
   const updateProgressCounter = (atr: 'i1' | 'i2' | 'i3' | 'i4', value: string) => {
     const up = progressCounter;
     if(value !== '') {
@@ -166,8 +135,7 @@ const RegisterActivity = () => {
 
       // Incrementing the booked seat number
 
-
-      // Make student id unique in the reg model and made session undefault 
+      // Registering user to the activity 
       const regObj = {
         activityId: registrationInputs.activityId,
         studentId: studentRes.data.data._id,
@@ -183,28 +151,14 @@ const RegisterActivity = () => {
           type: "success",
         });
       } else {
-        toast({
-          title: "Error",
-          message: "Something went wrong",
-          type: "error",
-        });
+        registrationErrorHandling("Something went wrong",)
       }
     } catch (err) {
       if (err instanceof Error) {
-        toast({
-          title: "Error",
-          message: err.message,
-          type: "error",
-        });
-
+        registrationErrorHandling(err.message)
         return;
       }
-
-      toast({
-        title: "Error",
-        message: "Something went wrong",
-        type: "error",
-      });
+      registrationErrorHandling("Something went wrong")
     } finally {
       setIsLoading(false);
     }
