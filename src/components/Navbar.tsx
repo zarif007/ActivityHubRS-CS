@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import React from "react";
-import { GiStairsGoal } from "react-icons/gi";
+import { GiPublicSpeaker, GiStairsGoal } from "react-icons/gi";
 import { BiLogIn } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { BsPersonWorkspace } from "react-icons/bs";
 
 const Navbar = () => {
 
@@ -13,7 +14,7 @@ const Navbar = () => {
   const styles = {
     wrapper: `p-2 fixed max-w-7xl mx-auto w-full backdrop-blur-sm z-50 top-0 left-0 right-0 h-16 md:h-20 shadow-sm 
       flex items-center justify-between rounded-sm`,
-    optionStyles: `flex space-x-2 items-center justify-center shadow-2xl font-extrabold text-xl md:text-2xl lg:text-3xl 
+    optionStyles: `flex space-x-2 items-center justify-center shadow-2xl font-extrabold text-2xl 
       text-white cursor-pointer no-underline hover:underline decoration-indigo-500`,
   };
 
@@ -27,11 +28,19 @@ const Navbar = () => {
       <div className="flex space-x-3 md:space-x-8">
         <h1 className={styles.optionStyles} onClick={() => router.push('/activities')} >
           <GiStairsGoal />
-          <p>Activities</p>
+          <p className="hidden md:flex">Activities</p>
         </h1>
         <h1 className={styles.optionStyles} onClick={() => router.push('/registeractivity')} >
           <BiLogIn />
-          <p>Register</p>
+          <p className="hidden md:flex">Register</p>
+        </h1>
+        <h1 className={styles.optionStyles} onClick={() => router.push('/registeractivity')} >
+          <GiPublicSpeaker />
+          <p className="hidden md:flex">Seminars</p>
+        </h1>
+        <h1 className={styles.optionStyles} onClick={() => router.push('/registeractivity')} >
+          <BsPersonWorkspace />
+          <p className="hidden md:flex">Workshops</p>
         </h1>
       </div>
 

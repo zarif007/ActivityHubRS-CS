@@ -2,8 +2,9 @@
 import { colorSchema } from "@/lib/ColorSchema"
 import { useRouter } from "next/navigation"
 import React from "react"
-import { GiStairsGoal } from 'react-icons/gi';
+import { GiPublicSpeaker, GiStairsGoal } from 'react-icons/gi';
 import { BiLogIn } from 'react-icons/bi';
+import { BsPersonWorkspace } from "react-icons/bs";
 
 
 export default function Home() {
@@ -23,6 +24,14 @@ export default function Home() {
       <button className={styles.button} onClick={() => router.push('/registeractivity')}>
         <BiLogIn className="w-8 h-8" />
         <p>Register activity</p>
+      </button>
+      <button className={styles.button} onClick={() => router.push('/seminars')}>
+        <GiPublicSpeaker className="w-8 h-8" />
+        <p>Seminars</p>
+      </button>
+      <button className={styles.button} onClick={() => router.push('/workshops')}>
+        <BsPersonWorkspace className="w-8 h-8 " />
+        <p>Workshops</p>
       </button>
     </main>
   )
