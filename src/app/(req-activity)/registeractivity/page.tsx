@@ -113,28 +113,6 @@ const RegisterActivity = () => {
         return;
       }
 
-      // Checking if this user already registered or not
-      const isAlreadyRegistered = await axios.get(
-        `${apiEndpointV1}/registration/byStudentId/${studentRes.data.data._id}`
-      );
-
-      if (isAlreadyRegistered.data.data.length !== 0) {
-        registrationErrorHandling('This email has already enrolled to an activity')
-        return;
-      }
-
-      // Checking if there is any available seat
-      const activityStateRes = await axios.get(
-        `${apiEndpointV1}/activityState/${registrationInputs.activityId}`
-      );
-
-      if(activityStateRes.data.data.totalSeat - activityStateRes.data.data.bookedSeat <= 0){
-        registrationErrorHandling('No available seat in this activity')
-        return;
-      }
-
-      // Incrementing the booked seat number
-
       // Registering user to the activity 
       const regObj = {
         activityId: registrationInputs.activityId,
@@ -142,23 +120,14 @@ const RegisterActivity = () => {
         session: "Summer2023"
       }
 
-      const res = await axios.post(`${apiEndpointV1}/registration`, regObj)
-      
-      if(res.status === 200) {
-        toast({
-          title: "Success",
-          message: "Activity enrollment successful",
-          type: "success",
-        });
-      } else {
-        registrationErrorHandling("Something went wrong",)
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        registrationErrorHandling(err.message)
-        return;
-      }
-      registrationErrorHandling("Something went wrong")
+      await axios.post(`${apiEndpointV1}/registration`, regObj)
+      toast({
+        title: "Success",
+        message: "Activity enrollment successful",
+        type: "success",
+      });
+    } catch (err: any) {
+      registrationErrorHandling(err.response.data.message)
     } finally {
       setIsLoading(false);
     }
