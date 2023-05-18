@@ -10,6 +10,7 @@ import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import { ActivityInterface } from "@/types/activity";
 import { toast } from "@/components/ui/Toast";
 import { Progress } from "@/components/ui/Progress";
+import { StudentInterface } from "@/types/student";
 
 interface RegistrationInputsInterface {
   email: string;
@@ -53,6 +54,8 @@ const RegisterActivity = () => {
       activityId: "",
     });
 
+  const [studentInfo, setStudentInfo] = useState<StudentInterface | null>()
+
   useEffect(() => {
     const getActivities = async () => {
       const res = await axios.get(`${apiEndpointV1}/activity`);
@@ -61,6 +64,24 @@ const RegisterActivity = () => {
 
     getActivities();
   }, []);
+
+  useEffect(() => {
+    const getStudentInfo = async () => {
+      if(registrationInputs.email.endsWith('@g.bracu.ac.bd')) {
+        setIsLoading(true);
+        // Checking if there is any student with this email
+        const studentRes = await axios.get(
+          `${apiEndpointV1}/student/byEmail/${registrationInputs.email}`
+        );
+  
+        setStudentInfo(studentRes.data.data);
+        setIsLoading(false)
+      } else {
+        setStudentInfo(null)
+      }
+    }
+    getStudentInfo();
+  }, [registrationInputs.email])
 
   const updateProgressCounter = (atr: 'i1' | 'i2' | 'i3' | 'i4', value: string) => {
     const up = progressCounter;
@@ -104,19 +125,17 @@ const RegisterActivity = () => {
 
     try {
       // Checking if there is any student with this email
-      const studentRes = await axios.get(
-        `${apiEndpointV1}/student/byEmail/${registrationInputs.email}`
-      );
-
-      if (studentRes.data.data === null) {
+      if (studentInfo === null) {
         registrationErrorHandling('Invalid Email iD, check and try again')
         return;
       }
 
+      if(!studentInfo?._id) return;
+
       // Registering user to the activity 
       const regObj = {
         activityId: registrationInputs.activityId,
-        studentId: studentRes.data.data._id,
+        studentId: studentInfo._id,
         session: "Summer2023"
       }
 
@@ -226,6 +245,14 @@ const RegisterActivity = () => {
         {error !== "" && (
           <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
         )}
+
+        {
+          (studentInfo && studentInfo?.email.length > 0) && <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
+            <p>{studentInfo.name}</p>
+            <p>ID: {studentInfo.studentId}</p>
+            <p>Phone Number: 0{studentInfo.phoneNumber}</p>
+          </div>
+        }
 
         {/* Confirmation button */}
         <button
