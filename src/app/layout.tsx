@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Colorhydration from '@/components/Colorhydration'
 import { colorSchema } from '@/lib/ColorSchema'
 import { Toaster } from '@/components/ui/Toast'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${colorSchema.background}`}>
+      <GoogleAnalytics/>
       <Colorhydration />
       <Navbar />
 
