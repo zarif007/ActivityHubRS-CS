@@ -9,7 +9,7 @@ const Loading = () => {
     button: `${colorSchema.button} mt-2 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
   return (
-    <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900 pt-32 px-5 md:px-2">
+    <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900 px-5 md:px-2">
       <Skeleton className="flex flex-wrap w-full mb-20">
         <Skeleton className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <Skeleton className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">

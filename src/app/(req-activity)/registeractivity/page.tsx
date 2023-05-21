@@ -18,7 +18,7 @@ interface RegistrationInputsInterface {
   activityId: string;
 }
 
-const progressEmojis = ['👍', '😎', '🤩', '🚀', '🔥']
+const progressEmojis = ["👍", "😎", "🤩", "🚀", "🔥"];
 
 const RegisterActivity = () => {
   const styles = {
@@ -54,7 +54,7 @@ const RegisterActivity = () => {
       activityId: "",
     });
 
-  const [studentInfo, setStudentInfo] = useState<StudentInterface | null>()
+  const [studentInfo, setStudentInfo] = useState<StudentInterface | null>();
 
   useEffect(() => {
     const getActivities = async () => {
@@ -67,33 +67,36 @@ const RegisterActivity = () => {
 
   useEffect(() => {
     const getStudentInfo = async () => {
-      if(registrationInputs.email.endsWith('@g.bracu.ac.bd')) {
+      if (registrationInputs.email.endsWith("@g.bracu.ac.bd")) {
         setIsLoading(true);
         // Checking if there is any student with this email
         const studentRes = await axios.get(
           `${apiEndpointV1}/student/byEmail/${registrationInputs.email}`
         );
-  
-        setStudentInfo(studentRes.data.data);
-        setIsLoading(false)
-      } else {
-        setStudentInfo(null)
-      }
-    }
-    getStudentInfo();
-  }, [registrationInputs.email])
 
-  const updateProgressCounter = (atr: 'i1' | 'i2' | 'i3' | 'i4', value: string) => {
+        setStudentInfo(studentRes.data.data);
+        setIsLoading(false);
+      } else {
+        setStudentInfo(null);
+      }
+    };
+    getStudentInfo();
+  }, [registrationInputs.email]);
+
+  const updateProgressCounter = (
+    atr: "i1" | "i2" | "i3" | "i4",
+    value: string
+  ) => {
     const up = progressCounter;
-    if(value !== '') {
-      up[`${atr}`] = Math.min(1, up[`${atr}`] + 1)
+    if (value !== "") {
+      up[`${atr}`] = Math.min(1, up[`${atr}`] + 1);
     } else {
-      up[`${atr}`] = Math.max(0, up[`${atr}`] - 1)
+      up[`${atr}`] = Math.max(0, up[`${atr}`] - 1);
     }
 
     up.step = up.i1 + up.i2 + up.i3 + up.i4 + 1;
-    setProgressCounter(up)
-  }
+    setProgressCounter(up);
+  };
 
   const registrationErrorHandling = (errMsg: string) => {
     toast({
@@ -102,7 +105,37 @@ const RegisterActivity = () => {
       type: "error",
     });
     setIsLoading(false);
-  }
+  };
+
+  const validateInputs = () => {
+    if (registrationInputs.activityId === "") {
+      setError("You must select an activity");
+      return false;
+    }
+
+    if (!isTCChecked) {
+      setError("Without accepting terms and conditions, you can not register");
+      return false;
+    }
+
+    // Validating phone number ( +880 | 01 | 00 )
+    if (
+      !new RegExp(/^(?:(?:\+|00)88|01)?(?:\d{11}|\d{13})$/gm).test(
+        registrationInputs.phoneNumber
+      )
+    ) {
+      setError("Invalid phone number");
+      return false;
+    }
+
+    // Checking if there is any student with this email
+    if (studentInfo === null) {
+      registrationErrorHandling("Invalid Email iD, check and try again");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,42 +144,28 @@ const RegisterActivity = () => {
 
     if (isLoading) return;
 
-    if (registrationInputs.activityId === "") {
-      setError("You must select an activity");
-      return;
-    }
-
-    if (!isTCChecked) {
-      setError("Without accepting terms and conditions, you can not register");
-      return;
-    }
+    if (!validateInputs()) return;
 
     setIsLoading(true);
 
     try {
-      // Checking if there is any student with this email
-      if (studentInfo === null) {
-        registrationErrorHandling('Invalid Email iD, check and try again')
-        return;
-      }
+      if (!studentInfo?._id) return;
 
-      if(!studentInfo?._id) return;
-
-      // Registering user to the activity 
+      // Registering user to the activity
       const regObj = {
         activityId: registrationInputs.activityId,
         studentId: studentInfo._id,
-        session: "Summer2023"
-      }
+        session: "Summer2023",
+      };
 
-      await axios.post(`${apiEndpointV1}/registration`, regObj)
+      await axios.post(`${apiEndpointV1}/registration`, regObj);
       toast({
         title: "Success",
         message: "Activity enrollment successful",
         type: "success",
       });
     } catch (err: any) {
-      registrationErrorHandling(err.response.data.message)
+      registrationErrorHandling(err.response.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -160,7 +179,7 @@ const RegisterActivity = () => {
           <p>Register Activity</p>
           <FiCornerRightDown className="mt-8 text-indigo-500" />
         </h1>
-        
+
         {/* G Suite taker input */}
         <div className="my-3">
           <label className={styles.label}>
@@ -172,8 +191,8 @@ const RegisterActivity = () => {
               setRegistrationInputs({
                 ...registrationInputs,
                 email: e.target.value,
-              })
-              updateProgressCounter('i1', e.target.value)
+              });
+              updateProgressCounter("i1", e.target.value);
             }}
             required
           />
@@ -190,8 +209,8 @@ const RegisterActivity = () => {
               setRegistrationInputs({
                 ...registrationInputs,
                 phoneNumber: e.target.value,
-              })
-              updateProgressCounter('i2', e.target.value)
+              });
+              updateProgressCounter("i2", e.target.value);
             }}
             required
           />
@@ -209,8 +228,8 @@ const RegisterActivity = () => {
               setRegistrationInputs({
                 ...registrationInputs,
                 activityId: e.target.value,
-              })
-              updateProgressCounter('i3', e.target.value)
+              });
+              updateProgressCounter("i3", e.target.value);
             }}
           >
             <option value="">Select Activity</option>
@@ -229,8 +248,8 @@ const RegisterActivity = () => {
             className="w-4 h-4 text-blue-500"
             checked={isTCChecked}
             onChange={(e) => {
-              setIsTCChecked(e.target.checked)
-              updateProgressCounter('i4', e.target.checked ? 'rr' : '')
+              setIsTCChecked(e.target.checked);
+              updateProgressCounter("i4", e.target.checked ? "rr" : "");
             }}
           />
           <label htmlFor="radio-button" className={styles.label}>
@@ -240,19 +259,24 @@ const RegisterActivity = () => {
         </div>
 
         <Progress value={progressCounter.step * 20} className="mt-2" />
-        <p className={styles.label}>{progressCounter.step}/5 {progressEmojis[progressCounter.step - 1]}</p>
+        <p className={styles.label}>
+          {progressCounter.step}/5 {progressEmojis[progressCounter.step - 1]}
+        </p>
 
         {error !== "" && (
           <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
         )}
 
-        {
-          (studentInfo && studentInfo?.email.length > 0) && <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
+        {studentInfo && studentInfo?.email.length > 0 && (
+          <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
             <p>{studentInfo.name}</p>
             <p>ID: {studentInfo.studentId}</p>
-            <p>Phone Number: 0{studentInfo.phoneNumber}</p>
+            <p>
+              Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
+              {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)}
+            </p>
           </div>
-        }
+        )}
 
         {/* Confirmation button */}
         <button
