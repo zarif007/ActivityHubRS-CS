@@ -10,11 +10,6 @@ import React, { useEffect, useState } from "react";
 import { ActivityStateInterface } from "@/types/activityState";
 import Loading from "./loading";
 
-export const metadata: Metadata = {
-  title: "RS Activity || Activities",
-  description: "Rs Activities",
-};
-
 const Activities = () => {
   const styles = {
     button: `${colorSchema.button} mt-2 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
