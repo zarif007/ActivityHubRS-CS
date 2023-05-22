@@ -155,15 +155,21 @@ const RegisterActivity = () => {
       const regObj = {
         activityId: registrationInputs.activityId,
         studentId: studentInfo._id,
-        session: "Summer2023",
+        studentName: studentInfo.name,
+        // session: "Summer2023", default in  model, so no need
+        newPhoneNumber: registrationInputs.phoneNumber,
       };
 
-      await axios.post(`${apiEndpointV1}/registration`, regObj);
-      toast({
-        title: "Success",
-        message: "Activity enrollment successful",
-        type: "success",
-      });
+      const {data} = await axios.post(`${apiEndpointV1}/registration`, regObj);
+      const {smsResponse} = data.data;
+      if (data.success === true && smsResponse[0].status === "SENT") {
+        toast({
+          title: "Success",
+          message: smsResponse[0].statusmsg,
+          type: "success",
+        });
+      }
+      
     } catch (err: any) {
       registrationErrorHandling(err.response.data.message);
     } finally {

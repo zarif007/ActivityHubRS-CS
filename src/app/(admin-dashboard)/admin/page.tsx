@@ -6,6 +6,7 @@ import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import { colorSchema } from "@/lib/ColorSchema";
 import { RegistrationInterface } from "@/types/registration";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
@@ -13,6 +14,7 @@ const AdminDashboard = () => {
     wrapper: `flex space-y-4 min-h-screen flex-col items-center justify-center py-24 mx-2`,
     button: `${colorSchema.button} cursor-pointer mt-8 flex py-3 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
     label: `leading-7 text-sm text-gray-400`,
+    exportButton: `${colorSchema.button} cursor-pointer flex p-3  max-w-lg font-extrabold text-l rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
 
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
@@ -30,16 +32,16 @@ const AdminDashboard = () => {
     setLoading(true);
     setError('');
 
-    if(secretKey === 'ABCD') {
-        setIsAdmin(true)
+    if (secretKey === 'ABCD') {
+      setIsAdmin(true)
     } else {
-        setError('Invalid Secret key')
+      setError('Invalid Secret key')
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    if(!isAdmin) return;
+    if (!isAdmin) return;
 
     const getInfo = async () => {
       const res = await axios.get(`${apiEndpointV1}/registration`)
@@ -70,7 +72,16 @@ const AdminDashboard = () => {
         </form>
       ) : (
         <div className="w-full max-w-5xl">
-          <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
+            <Link
+              href={`${apiEndpointV1}/registration/export`}
+              className={styles.exportButton}
+            >
+              Export
+            </Link>
+          </div>
+
           <ActivityRegStudentTable registrationInfo={registrationInfo} />
         </div>
       )}
