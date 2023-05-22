@@ -42,7 +42,7 @@ const Activity = ({ params }: PageParams) => {
                 <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-800 text-gray-600">
                   {activityState.activityId.instructor.image ? (
                     <img
-                      alt="content"
+                      alt="Instructor"
                       className="object-center h-full w-full"
                       src={activityState.activityId.instructor.image}
                     />

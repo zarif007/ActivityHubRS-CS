@@ -47,14 +47,14 @@ const Navbar = () => {
       <div className="flex space-x-4 md:space-x-8">
         <h1
           className={styles.optionStyles}
-          onClick={() => router.push("/registeractivity")}
+          onClick={() => router.push("/seminars")}
         >
           <GiPublicSpeaker />
           <p className="hidden md:flex">Seminars</p>
         </h1>
         <h1
           className={styles.optionStyles}
-          onClick={() => router.push("/registeractivity")}
+          onClick={() => router.push("/workshops")}
         >
           <BsPersonWorkspace />
           <p className="hidden md:flex">Workshops</p>
