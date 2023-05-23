@@ -62,15 +62,18 @@ const Activities = () => {
                           <Link
                             href={`/activities/${activityState.activityId._id}`}
                           >
-                            <div className="text-lg text-white font-medium title-font mb-4 h-12">
+                            <div className="text-lg text-white font-medium title-font mb-2 h-8">
                               {activityState.activityId.name}
                             </div>
                           </Link>
+                          <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+                            Price: {activityState.activityId.price}
+                          </h3>
                           <p className="leading-relaxed text-base h-20">
                             {activityState.activityId.description.slice(0, 60)}
                             ...
                           </p>
-                          
+
                           <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
                             Seat Status: {activityState.bookedSeat}/{activityState.totalSeat}
                           </h3>
