@@ -34,7 +34,7 @@ const Activities = () => {
       {activityStates ? (
         <section className="text-gray-400 body-font">
           <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap w-full mb-20">
+            <div className="flex flex-wrap w-full mb-16">
               <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
                   RS Activities
@@ -43,7 +43,7 @@ const Activities = () => {
               </div>
             </div>
             <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded">
-              <h3 className="text-bold font-semibold text-white">Deposit Information</h3>
+              <h3 className="text-bold font-semibold text-white">Fee Deposit Information</h3>
               <p><span className="text-white">Day: </span>June 8/9/10</p>
               <p><span className="text-white">Venue: </span>Rs Accounts Office,Surjodoy Buiding</p>
             </div>

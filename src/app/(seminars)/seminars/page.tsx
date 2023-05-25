@@ -1,44 +1,29 @@
 "use client";
 import { SeminarInterface } from "@/types/seminar";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiTimeFive } from "react-icons/bi";
 import { CgPin } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import { colorSchema } from "@/lib/ColorSchema";
+import axios from "axios";
+import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 
 const Seminars = () => {
   const styles = {
     button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
-  const [seminars, setSeminars] = useState<SeminarInterface[] | null>([
-    {
-      name: "Seminar on Awareness on Addiction",
-      image: "https://i.ibb.co/Qdq0STZ/BRAC-programs-drug-addiction-1.png",
-      details: `The session&#39;s objectives were to create awareness of addiction, empower the students to take
-    preventive measures to say no to drugs & addictive behaviors and support their friends to get rid of
-    them. The session was conducted by renowned Psychologist Professor Mehtab Khanam, Adviser of the
-    Counseling Unit, BRAC University.`,
-      keySpeaker: `Psychologist Professor Mehtab Khanam, Adviser of the Counseling Unit, BRAC University.`,
-      venue: "AnandoPur",
-      date: "24th May, 2023",
-      registeredStudents: 1024,
-      gender: "Both",
-    },
-    {
-      name: "Seminar on Digital rights & responsibilities",
-      image: "https://i.ibb.co/2N0W8y3/Brac-Digital-Rights-Program.png",
-      details: `The session objective is to re-thinking rights & responsibilities in cyberspace. It will help you to
-    understand freedom vs. Restrictions and how to maintain the fine balance? Therefore, we need
-    reasonable restrictions on online activities.`,
-      keySpeaker: `Sr. Lecturer, School of Law, BRAC University, Member, Artificial Intelligence Working
-    Group, HAC. Advocate, District & Sessions Judge Court, Dhaka`,
-      venue: "AnandoPur",
-      date: "24th May, 2023",
-      registeredStudents: 945,
-      gender: "Both",
-    },
-  ]);
+  const [seminars, setSeminars] = useState<SeminarInterface[] | null>();
+
+  useEffect(() => {
+
+    const getData = async () => {
+      const res = await axios.get(`${apiEndpointV1}/seminar`)
+      setSeminars(res.data.data)
+    }
+
+    getData()
+  }, [])
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
       <section className="text-gray-400 body-font">
@@ -98,7 +83,7 @@ const Seminars = () => {
                             </div>
                             <span className="text-gray-500 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-md pr-3 py-1">
                               <FaUsers className="mr-1" />
-                              {seminar.registeredStudents}
+                              {seminar.registeredStudents.length}
                             </span>
                           </div>
                         </div>

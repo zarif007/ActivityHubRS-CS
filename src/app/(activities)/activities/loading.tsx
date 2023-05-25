@@ -10,7 +10,7 @@ const Loading = () => {
   };
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900 px-5 md:px-2">
-      <Skeleton className="flex flex-wrap w-full mb-20">
+      <Skeleton className="flex flex-wrap w-full mb-16">
         <Skeleton className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <Skeleton className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
             RS Activities

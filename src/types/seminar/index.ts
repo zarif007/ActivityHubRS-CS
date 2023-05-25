@@ -4,7 +4,7 @@ export interface SeminarInterface {
     details: string;
     keySpeaker: string;
     venue: string;
-    registeredStudents: number;
+    registeredStudents: string[]
     date: string;
     gender: "Both" | "Male" | "Female";
 }
