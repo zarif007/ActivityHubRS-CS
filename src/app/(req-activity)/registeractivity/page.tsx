@@ -160,7 +160,10 @@ const RegisterActivity = () => {
         newPhoneNumber: registrationInputs.phoneNumber,
       };
 
-      const { data } = await axios.post(`${apiEndpointV1}/registration`, regObj);
+      const { data } = await axios.post(
+        `${apiEndpointV1}/registration`,
+        regObj
+      );
       const { smsResponse } = data.data;
       if (data.success === true && smsResponse[0].status === "SENT") {
         toast({
@@ -169,7 +172,6 @@ const RegisterActivity = () => {
           type: "success",
         });
       }
-
     } catch (err: any) {
       registrationErrorHandling(err.response.data.message);
     } finally {
@@ -273,20 +275,16 @@ const RegisterActivity = () => {
           <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
         )}
 
-
-        <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">{
-          isLoading && <p>{"Searching you in Rs Database"}</p>
-        }
-          {studentInfo && studentInfo?.email.length > 0 && (<>
+        {studentInfo && (
+          <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
             <p>{studentInfo.name}</p>
             <p>ID: {studentInfo.studentId}</p>
             <p>
               Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
               {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)}
             </p>
-          </>
-          )}
-        </div>
+          </div>
+        )}
         {/* Confirmation button */}
         <button
           className={`${styles.button} disabled:bg-opacity-50 disabled:cursor-not-allowed`}
@@ -303,8 +301,8 @@ const RegisterActivity = () => {
             </>
           )}
         </button>
-      </form >
-    </div >
+      </form>
+    </div>
   );
 };
 

@@ -76,11 +76,11 @@ const Activity = ({ params }: PageParams) => {
                   {activityState.activityId.name}
                 </h1>
                 <div className="w-24 h-1 bg-indigo-500 rounded mt-2 mb-4 mx-auto sm:mx-0"></div>
-                <h3 className="tracking-widest text-indigo-400 text-sm font-medium title-font">
-                  {activityState.activityId.day}({activityState.activityId.classTime}) at {activityState.activityId.venue}
-                </h3>
-                <h3 className="tracking-widest text-indigo-400 text-sm font-medium title-font">
+                <h3 className={`tracking-widest ${activityState.bookedSeat < activityState.totalSeat ? 'text-green-400' : 'text-red-500'} text-sm font-medium title-font`}>
                   Seat Status: {activityState.bookedSeat}/{activityState.totalSeat}
+                </h3>
+                <h3 className={`tracking-widest text-indigo-400 text-sm font-medium title-font`}>
+                  Registration Fee: {activityState.activityId.price}
                 </h3>
                 <p className="leading-relaxed text-lg mb-4">
                   {activityState.activityId.description}

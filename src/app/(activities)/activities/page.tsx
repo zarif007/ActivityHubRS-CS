@@ -42,6 +42,11 @@ const Activities = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
+            <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded">
+              <h3 className="text-bold font-semibold text-white">Deposit Information</h3>
+              <p><span className="text-white">Day: </span>June 8/9/10</p>
+              <p><span className="text-white">Venue: </span>Rs Accounts Office,Surjodoy Buiding</p>
+            </div>
             <div className="flex flex-wrap -m-4">
               {activityStates.length > 0 &&
                 activityStates.map(
@@ -55,26 +60,21 @@ const Activities = () => {
                             alt="Activity Image"
                             style={{ objectFit: "contain" }}
                           />
-                          <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+                          {/* <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
                             {activityState.activityId.day}(
                             {activityState.activityId.classTime})
+                          </h3> */}
+                          <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+                            Registration Fee: {activityState.activityId.price}
                           </h3>
                           <Link
                             href={`/activities/${activityState.activityId._id}`}
                           >
-                            <div className="text-lg text-white font-medium title-font mb-2 h-8">
+                            <div className="text-lg text-white font-medium title-font mb-6 h-8">
                               {activityState.activityId.name}
                             </div>
                           </Link>
-                          <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
-                            Price: {activityState.activityId.price}
-                          </h3>
-                          <p className="leading-relaxed text-base h-20">
-                            {activityState.activityId.description.slice(0, 60)}
-                            ...
-                          </p>
-
-                          <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+                          <h3 className={`tracking-widest ${activityState.bookedSeat < activityState.totalSeat ? 'text-green-400' : 'text-red-500'} text-xs font-medium title-font uppercase`}>
                             Seat Status: {activityState.bookedSeat}/{activityState.totalSeat}
                           </h3>
                           <Link

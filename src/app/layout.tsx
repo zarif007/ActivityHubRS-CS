@@ -5,6 +5,7 @@ import Colorhydration from '@/components/Colorhydration'
 import { colorSchema } from '@/lib/ColorSchema'
 import { Toaster } from '@/components/ui/Toast'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${colorSchema.background}`}>
       <GoogleAnalytics/>
+      <Analytics />
       <Colorhydration />
       <Navbar />
 
