@@ -155,7 +155,6 @@ const RegisterActivity = () => {
       const regObj = {
         activityId: registrationInputs.activityId,
         studentId: studentInfo._id,
-        studentName: studentInfo.name,
         // session: "Summer2023", default in  model, so no need
         newPhoneNumber: registrationInputs.phoneNumber,
       };
@@ -168,7 +167,7 @@ const RegisterActivity = () => {
       if (data.success === true && smsResponse[0].status === "SENT") {
         toast({
           title: "Success",
-          message: smsResponse[0].statusmsg,
+          message: smsResponse[0].message,
           type: "success",
         });
       }
