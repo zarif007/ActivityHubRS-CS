@@ -6,6 +6,7 @@ import axios from "axios";
 import React,{ useEffect, useState } from "react";
 import Loading from "./loading";
 import { ActivityStateInterface } from "@/types/activityState";
+import Image from "next/image";
 
 interface PageParams {
   params: {
@@ -31,10 +32,16 @@ const Activity = ({ params }: PageParams) => {
         <div className="container px-5 py-24 mx-auto flex flex-col">
           <div className="lg:w-4/6 mx-auto">
             <div className="rounded-lg h-80 w-80 mx-auto overflow-hidden">
-              <img
+              <Image
                 alt="Activity Image"
                 className="object-center h-full w-full"
+                height={100}
+                width={100}
                 src={activityState.activityId.image}
+                blurDataURL={activityState.activityId.image}
+                placeholder='blur'
+                priority
+                quality={100}
               />
             </div>
             <div className="flex flex-col-reverse sm:flex-row mt-10">
@@ -83,7 +90,11 @@ const Activity = ({ params }: PageParams) => {
                   Registration Fee: {activityState.activityId.price}
                 </h3>
                 <p className="leading-relaxed text-lg mb-4">
-                  {activityState.activityId.description}
+                  {
+                    activityState.activityId.description && activityState.activityId.description.split('\n').map((nl: string, index: number) => (
+                      <div key={index}>{nl}</div>
+                    ))
+                  }
                 </p>
               </div>
             </div>

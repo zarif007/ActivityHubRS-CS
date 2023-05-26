@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ActivityStateInterface } from "@/types/activityState";
 import Loading from "./loading";
+import Image from "next/image";
 
 const Activities = () => {
   const styles = {
@@ -54,11 +55,17 @@ const Activities = () => {
                     return (
                       <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
                         <div className="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
-                          <img
+                          <Image
                             className="h-40 rounded w-full object-cover object-center mb-6"
                             src={activityState.activityId.image}
                             alt="Activity Image"
+                            width={40}
+                            height={100}
                             style={{ objectFit: "contain" }}
+                            blurDataURL={activityState.activityId.image}
+                            placeholder='blur'
+                            priority
+                            quality={100}
                           />
                           {/* <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
                             {activityState.activityId.day}(
