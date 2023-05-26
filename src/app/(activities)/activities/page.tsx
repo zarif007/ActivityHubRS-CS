@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { ActivityStateInterface } from "@/types/activityState";
 import Loading from "./loading";
 import Image from "next/image";
+import { Input } from "@/components/ui/Input";
 
 const Activities = () => {
   const styles = {
@@ -43,10 +44,13 @@ const Activities = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded">
+            <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded flex flex-col justify-end">
               <h3 className="text-bold font-semibold text-white">Fee Deposit Information</h3>
               <p><span className="text-white">Day: </span>June 8/9/10</p>
               <p><span className="text-white">Venue: </span>Rs Accounts Office,Surjodoy Buiding</p>
+            </div>
+            <div>
+              <Input />
             </div>
             <div className="flex flex-wrap -m-4">
               {activityStates.length > 0 &&
