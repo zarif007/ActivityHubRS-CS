@@ -20,20 +20,38 @@ const Activities = () => {
   const [activityStates, setActivityStates] = useState<
     ActivityStateInterface[] | null
   >(null);
+  const [filteredActivityStates, setFilteredActivityStates] = useState<
+    ActivityStateInterface[] | null
+  >(null);
 
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`${apiEndpointV1}/activitystate`);
       setActivityStates(res.data.data);
+      setFilteredActivityStates(res.data.data);
     };
     getData();
   }, []);
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value.toLowerCase().replace(/\s/g, "");
+
+    const updated: ActivityStateInterface[] | undefined =
+      activityStates?.filter((activity: ActivityStateInterface) =>
+        activity.activityId.name
+          .toLowerCase()
+          .replace(/\s/g, "")
+          .includes(searchText)
+      );
+
+    updated && setFilteredActivityStates(updated);
+  };
 
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
       <AIActivitySuggestionModal />
 
-      {activityStates ? (
+      {filteredActivityStates ? (
         <section className="text-gray-400 body-font">
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap w-full mb-16">
@@ -44,17 +62,28 @@ const Activities = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded flex flex-col justify-end">
-              <h3 className="text-bold font-semibold text-white">Fee Deposit Information</h3>
-              <p><span className="text-white">Day: </span>June 8/9/10</p>
-              <p><span className="text-white">Venue: </span>Rs Accounts Office,Surjodoy Buiding</p>
+            <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded">
+              <h3 className="text-bold font-semibold text-white">
+                Fee Deposit Information
+              </h3>
+              <p>
+                <span className="text-white">Day: </span>June 8/9/10
+              </p>
+              <p>
+                <span className="text-white">Venue: </span>Rs Accounts
+                Office,Surjodoy Buiding
+              </p>
             </div>
-            <div>
-              <Input />
+            <div className="my-2 mb-6 flex items-end">
+              <Input
+                className="mx-auto"
+                placeholder="Search"
+                onChange={(e) => handleSearchInput(e)}
+              />
             </div>
             <div className="flex flex-wrap -m-4">
-              {activityStates.length > 0 &&
-                activityStates.map(
+              {filteredActivityStates.length > 0 &&
+                filteredActivityStates.map(
                   (activityState: ActivityStateInterface, index: number) => {
                     return (
                       <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
@@ -67,7 +96,7 @@ const Activities = () => {
                             height={100}
                             style={{ objectFit: "contain" }}
                             blurDataURL={activityState.activityId.image}
-                            placeholder='blur'
+                            placeholder="blur"
                             priority
                             quality={100}
                           />
@@ -85,8 +114,15 @@ const Activities = () => {
                               {activityState.activityId.name}
                             </div>
                           </Link>
-                          <h3 className={`tracking-widest ${activityState.bookedSeat < activityState.totalSeat ? 'text-green-400' : 'text-red-500'} text-xs font-medium title-font uppercase`}>
-                            Seat Status: {activityState.bookedSeat}/{activityState.totalSeat}
+                          <h3
+                            className={`tracking-widest ${
+                              activityState.bookedSeat < activityState.totalSeat
+                                ? "text-green-400"
+                                : "text-red-500"
+                            } text-xs font-medium title-font uppercase`}
+                          >
+                            Seat Status: {activityState.bookedSeat}/
+                            {activityState.totalSeat}
                           </h3>
                           <Link
                             href={`/activities/${activityState.activityId._id}`}
