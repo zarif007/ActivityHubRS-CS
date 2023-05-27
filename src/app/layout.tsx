@@ -1,33 +1,36 @@
-import Navbar from '@/components/Navbar'
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Colorhydration from '@/components/Colorhydration'
-import { colorSchema } from '@/lib/ColorSchema'
-import { Toaster } from '@/components/ui/Toast'
-import GoogleAnalytics from '@/components/GoogleAnalytics'
-import { Analytics } from '@vercel/analytics/react'
+import Navbar from "@/components/Navbar";
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Colorhydration from "@/components/Colorhydration";
+import { colorSchema } from "@/lib/ColorSchema";
+import { Toaster } from "@/components/ui/Toast";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Analytics } from "@vercel/analytics/react";
+import AuthProviders from "@/components/AuthProviders";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Activity Hub RS',
-  description: 'Activity Hub RS',
-}
+  title: "Activity Hub RS",
+  description: "Activity Hub RS",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={`${colorSchema.background}`}>
-      <GoogleAnalytics/>
+      <GoogleAnalytics />
       <Analytics />
       <Colorhydration />
-      <Navbar />
 
-      <Toaster position='bottom-center' />
-      <body className={inter.className}>{children}</body>
+      <Toaster position="bottom-center" />
+      <AuthProviders>
+        <Navbar />
+        <body>{children}</body>
+      </AuthProviders>
     </html>
-  )
+  );
 }

@@ -14,7 +14,7 @@ const Seminars = () => {
     button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
   const [seminars, setSeminars] = useState<SeminarInterface[] | null>();
-
+ 
   useEffect(() => {
 
     const getData = async () => {

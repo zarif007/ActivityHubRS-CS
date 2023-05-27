@@ -11,6 +11,7 @@ import { ActivityInterface } from "@/types/activity";
 import { toast } from "@/components/ui/Toast";
 import { Progress } from "@/components/ui/Progress";
 import { StudentInterface } from "@/types/student";
+import { useSession } from "next-auth/react";
 
 interface RegistrationInputsInterface {
   email: string;
@@ -31,9 +32,15 @@ const RegisterActivity = () => {
       transition-colors duration-200 ease-in-out`,
   };
 
+  const { data: session } = useSession();
+
+  console.log('email', session?.user?.email);
+
   const [isTCChecked, setIsTCChecked] = useState<boolean>(false);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const [error, setError] = useState<string>("");
 
@@ -180,7 +187,8 @@ const RegisterActivity = () => {
 
   return (
     <div className={styles.wrapper}>
-      <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+      {
+        isOpen ? <form className="w-full max-w-lg" onSubmit={handleSubmit}>
         {/* Top heading */}
         <h1 className="text-4xl font-extrabold mb-5 text-white flex space-x-2 justify-center items-center">
           <p>Register Activity</p>
@@ -300,7 +308,8 @@ const RegisterActivity = () => {
             </>
           )}
         </button>
-      </form>
+      </form> : <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
+      }
     </div>
   );
 };

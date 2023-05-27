@@ -6,6 +6,7 @@ import { GiPublicSpeaker, GiStairsGoal } from "react-icons/gi";
 import { BiLogIn } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { BsPersonWorkspace } from "react-icons/bs";
+import { signIn } from "next-auth/react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -29,10 +30,10 @@ const Navbar = () => {
         </h1>
         <h1
           className={styles.optionStyles}
-          onClick={() => router.push("/registeractivity")}
+          onClick={() => router.push("/seminars")}
         >
-          <BiLogIn />
-          <p className="hidden md:flex">Register</p>
+          <GiPublicSpeaker />
+          <p className="hidden md:flex">Seminars</p>
         </h1>
       </div>
       {/* Logo */}
@@ -47,17 +48,17 @@ const Navbar = () => {
       <div className="flex space-x-4 md:space-x-8">
         <h1
           className={styles.optionStyles}
-          onClick={() => router.push("/seminars")}
-        >
-          <GiPublicSpeaker />
-          <p className="hidden md:flex">Seminars</p>
-        </h1>
-        <h1
-          className={styles.optionStyles}
           onClick={() => router.push("/workshops")}
         >
           <BsPersonWorkspace />
           <p className="hidden md:flex">Workshops</p>
+        </h1>
+        <h1
+          className={styles.optionStyles}
+          onClick={() => {}}
+        >
+          <BiLogIn />
+          <p className="hidden md:flex">login</p>
         </h1>
       </div>
     </div>

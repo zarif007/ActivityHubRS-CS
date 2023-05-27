@@ -72,6 +72,16 @@ const AdminDashboard = () => {
         </form>
       ) : (
         <div className="w-full max-w-5xl">
+          <div className="flex space-x-4 items-center">
+            <h1 className="my-2 font-bold text-xl text-white">Turn on registration</h1>
+            <input
+              type="checkbox"
+              className="w-4 h-4 text-blue-500"
+              onChange={(e) => {
+              }}
+            />
+          </div>
+          <Input placeholder="Day" className="my-4" />
           <div className="flex items-center justify-between">
             <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
             <Link
