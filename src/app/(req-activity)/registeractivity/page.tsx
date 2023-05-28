@@ -11,7 +11,8 @@ import { ActivityInterface } from "@/types/activity";
 import { toast } from "@/components/ui/Toast";
 import { Progress } from "@/components/ui/Progress";
 import { StudentInterface } from "@/types/student";
-import { useSession } from "next-auth/react";
+import { ActivityStateInterface } from "@/types/activityState";
+// import { useSession } from "next-auth/react";
 
 interface RegistrationInputsInterface {
   email: string;
@@ -32,9 +33,9 @@ const RegisterActivity = () => {
       transition-colors duration-200 ease-in-out`,
   };
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  console.log('email', session?.user?.email);
+  // console.log('email', session?.user?.email);
 
   const [isTCChecked, setIsTCChecked] = useState<boolean>(false);
 
@@ -52,7 +53,7 @@ const RegisterActivity = () => {
     i4: 0,
   });
 
-  const [activities, setActivities] = useState<ActivityInterface[]>([]);
+  const [activities, setActivities] = useState<ActivityStateInterface[]>([]);
 
   const [registrationInputs, setRegistrationInputs] =
     useState<RegistrationInputsInterface>({
@@ -65,7 +66,8 @@ const RegisterActivity = () => {
 
   useEffect(() => {
     const getActivities = async () => {
-      const res = await axios.get(`${apiEndpointV1}/activity`);
+      const registrationDay = 1;
+      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${registrationDay}`);
       setActivities(res.data.data);
     };
 
@@ -189,126 +191,126 @@ const RegisterActivity = () => {
     <div className={styles.wrapper}>
       {
         isOpen ? <form className="w-full max-w-lg" onSubmit={handleSubmit}>
-        {/* Top heading */}
-        <h1 className="text-4xl font-extrabold mb-5 text-white flex space-x-2 justify-center items-center">
-          <p>Register Activity</p>
-          <FiCornerRightDown className="mt-8 text-indigo-500" />
-        </h1>
+          {/* Top heading */}
+          <h1 className="text-4xl font-extrabold mb-5 text-white flex space-x-2 justify-center items-center">
+            <p>Register Activity</p>
+            <FiCornerRightDown className="mt-8 text-indigo-500" />
+          </h1>
 
-        {/* G Suite taker input */}
-        <div className="my-3">
-          <label className={styles.label}>
-            G-Suite <span className="text-red-500 text-lg">*</span>
-          </label>
-          <Input
-            placeholder="***@g.bracu.ac.bd"
-            onChange={(e) => {
-              setRegistrationInputs({
-                ...registrationInputs,
-                email: e.target.value,
-              });
-              updateProgressCounter("i1", e.target.value);
-            }}
-            required
-          />
-        </div>
-
-        {/* Phone number taker input */}
-        <div className="my-3">
-          <label className={styles.label}>
-            Phone Number <span className="text-red-500 text-lg">*</span>
-          </label>
-          <Input
-            placeholder="01********"
-            onChange={(e) => {
-              setRegistrationInputs({
-                ...registrationInputs,
-                phoneNumber: e.target.value,
-              });
-              updateProgressCounter("i2", e.target.value);
-            }}
-            required
-          />
-        </div>
-
-        {/* Activity taker dropdown */}
-        <div className="my-3">
-          <label className={styles.label}>
-            Select an Activity <span className="text-red-500 text-lg">*</span>
-          </label>
-          <select
-            id="large"
-            className={styles.select}
-            onChange={(e) => {
-              setRegistrationInputs({
-                ...registrationInputs,
-                activityId: e.target.value,
-              });
-              updateProgressCounter("i3", e.target.value);
-            }}
-          >
-            <option value="">Select Activity</option>
-            {activities.map((activity: ActivityInterface) => (
-              <option key={activity._id} value={activity._id}>
-                {activity.name} ({activity.day})
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* T/C taker checkbox */}
-        <div className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            className="w-4 h-4 text-blue-500"
-            checked={isTCChecked}
-            onChange={(e) => {
-              setIsTCChecked(e.target.checked);
-              updateProgressCounter("i4", e.target.checked ? "rr" : "");
-            }}
-          />
-          <label htmlFor="radio-button" className={styles.label}>
-            I Agree with the terms and conditions{" "}
-            <span className="text-red-500 text-lg">*</span>
-          </label>
-        </div>
-
-        <Progress value={progressCounter.step * 20} className="mt-2" />
-        <p className={styles.label}>
-          {progressCounter.step}/5 {progressEmojis[progressCounter.step - 1]}
-        </p>
-
-        {error !== "" && (
-          <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
-        )}
-
-        {studentInfo && (
-          <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
-            <p>{studentInfo.name}</p>
-            <p>ID: {studentInfo.studentId}</p>
-            <p>
-              Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
-              {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)}
-            </p>
+          {/* G Suite taker input */}
+          <div className="my-3">
+            <label className={styles.label}>
+              G-Suite <span className="text-red-500 text-lg">*</span>
+            </label>
+            <Input
+              placeholder="***@g.bracu.ac.bd"
+              onChange={(e) => {
+                setRegistrationInputs({
+                  ...registrationInputs,
+                  email: e.target.value,
+                });
+                updateProgressCounter("i1", e.target.value);
+              }}
+              required
+            />
           </div>
-        )}
-        {/* Confirmation button */}
-        <button
-          className={`${styles.button} disabled:bg-opacity-50 disabled:cursor-not-allowed`}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <p>Loading...</p>
-            </>
-          ) : (
-            <>
-              <p>Confirm</p>
-              <HiArrowRight />
-            </>
+
+          {/* Phone number taker input */}
+          <div className="my-3">
+            <label className={styles.label}>
+              Phone Number <span className="text-red-500 text-lg">*</span>
+            </label>
+            <Input
+              placeholder="01********"
+              onChange={(e) => {
+                setRegistrationInputs({
+                  ...registrationInputs,
+                  phoneNumber: e.target.value,
+                });
+                updateProgressCounter("i2", e.target.value);
+              }}
+              required
+            />
+          </div>
+
+          {/* Activity taker dropdown */}
+          <div className="my-3">
+            <label className={styles.label}>
+              Select an Activity <span className="text-red-500 text-lg">*</span>
+            </label>
+            <select
+              id="large"
+              className={styles.select}
+              onChange={(e) => {
+                setRegistrationInputs({
+                  ...registrationInputs,
+                  activityId: e.target.value,
+                });
+                updateProgressCounter("i3", e.target.value);
+              }}
+            >
+              <option value="">Select Activity</option>
+              {activities.map((activity: ActivityStateInterface) => (
+                <option key={activity.activityId._id} value={activity.activityId._id}>
+                  {activity.activityId.name} ({activity.activityId.day})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* T/C taker checkbox */}
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              className="w-4 h-4 text-blue-500"
+              checked={isTCChecked}
+              onChange={(e) => {
+                setIsTCChecked(e.target.checked);
+                updateProgressCounter("i4", e.target.checked ? "rr" : "");
+              }}
+            />
+            <label htmlFor="radio-button" className={styles.label}>
+              I Agree with the terms and conditions{" "}
+              <span className="text-red-500 text-lg">*</span>
+            </label>
+          </div>
+
+          <Progress value={progressCounter.step * 20} className="mt-2" />
+          <p className={styles.label}>
+            {progressCounter.step}/5 {progressEmojis[progressCounter.step - 1]}
+          </p>
+
+          {error !== "" && (
+            <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
           )}
-        </button>
-      </form> : <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
+
+          {studentInfo && (
+            <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
+              <p>{studentInfo.name}</p>
+              <p>ID: {studentInfo.studentId}</p>
+              <p>
+                Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
+                {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)}
+              </p>
+            </div>
+          )}
+          {/* Confirmation button */}
+          <button
+            className={`${styles.button} disabled:bg-opacity-50 disabled:cursor-not-allowed`}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <p>Loading...</p>
+              </>
+            ) : (
+              <>
+                <p>Confirm</p>
+                <HiArrowRight />
+              </>
+            )}
+          </button>
+        </form> : <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
       }
     </div>
   );
