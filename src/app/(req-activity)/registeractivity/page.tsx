@@ -66,8 +66,9 @@ const RegisterActivity = () => {
 
   useEffect(() => {
     const getActivities = async () => {
-      const registrationDay = 1;
-      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${registrationDay}`);
+
+      const registrationDay = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
+      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${registrationDay.data.data[0].registrationDay}`);
       setActivities(res.data.data);
     };
 

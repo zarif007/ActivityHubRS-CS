@@ -17,7 +17,7 @@ const AdminDashboard = () => {
     exportButton: `${colorSchema.button} cursor-pointer flex p-3  max-w-lg font-extrabold text-l rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
   };
 
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(true);
 
   const [secretKey, setSecretKey] = useState<string>("");
 
@@ -26,6 +26,17 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [registrationInfo, setRegistrationInfo] = useState<RegistrationInterface[]>([]);
+
+  const [adminInfo, setAdminInfo] = useState<{
+    isRegistrationOpen: boolean;
+    registrationDay: number;
+    session: string
+  }>({
+    isRegistrationOpen: true,
+    registrationDay: 1,
+    session: "Summer2023"
+
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +61,11 @@ const AdminDashboard = () => {
 
     getInfo()
   }, [isAdmin])
+
+  // useEffect(() => {
+  //   if(adminInfo.registrationDay == NaN) setAdminInfo({ ...adminInfo, registrationDay: 1 });
+
+  // }, [adminInfo])
 
   return (
     <div className={styles.wrapper}>
@@ -78,10 +94,16 @@ const AdminDashboard = () => {
               type="checkbox"
               className="w-4 h-4 text-blue-500"
               onChange={(e) => {
+                // if(!e.target.checked) return;
+                // setAdminInfo({ ...adminInfo, isRegistrationOpen: e.target.checked });
+
               }}
             />
           </div>
-          <Input placeholder="Day" className="my-4" />
+          <Input placeholder="Day" className="my-4" onChange={(e) => {
+            setAdminInfo({ ...adminInfo, registrationDay: parseInt(e.target.value) });
+
+          }} />
           <div className="flex items-center justify-between">
             <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
             <Link
