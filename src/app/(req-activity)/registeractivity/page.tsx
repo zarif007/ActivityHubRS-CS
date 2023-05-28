@@ -41,7 +41,7 @@ const RegisterActivity = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
 
@@ -66,10 +66,10 @@ const RegisterActivity = () => {
 
   useEffect(() => {
     const getActivities = async () => {
-
-      const registrationDay = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
-      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${registrationDay.data.data[0].registrationDay}`);
+      const regInfo = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
+      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${regInfo.data.data[0].registrationDay}`);
       setActivities(res.data.data);
+      setIsOpen(regInfo.data.data[0].isRegistrationOpen)
     };
 
     getActivities();

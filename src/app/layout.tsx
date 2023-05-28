@@ -1,5 +1,8 @@
+'use client'
+
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import "./nprogress.css";
 import { Inter } from "next/font/google";
 import Colorhydration from "@/components/Colorhydration";
 import { colorSchema } from "@/lib/ColorSchema";
@@ -8,12 +11,20 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 import AuthProviders from "@/components/AuthProviders";
 
-const inter = Inter({ subsets: ["latin"] });
+import nProgress from 'nprogress'
+import Router from 'next/router'
 
-export const metadata = {
-  title: "Activity Hub RS",
-  description: "Activity Hub RS",
-};
+
+Router.events.on('routeChangeStart', nProgress.start);
+Router.events.on('routeChangeError', nProgress.done);
+Router.events.on('routeChangeComplete', nProgress.done);
+
+// const inter = Inter({ subsets: ["latin"] });
+
+// export const metadata = {
+//   title: "Activity Hub RS",
+//   description: "Activity Hub RS",
+// };
 
 export default function RootLayout({
   children,
@@ -25,7 +36,6 @@ export default function RootLayout({
       <GoogleAnalytics />
       <Analytics />
       <Colorhydration />
-
       <Toaster position="bottom-center" />
       <AuthProviders>
         <Navbar />
