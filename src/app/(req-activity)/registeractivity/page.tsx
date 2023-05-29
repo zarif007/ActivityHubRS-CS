@@ -44,6 +44,8 @@ const RegisterActivity = () => {
 
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
+  const [showTC, setShowTC] = useState<boolean>(false);
+
   const [error, setError] = useState<string>("");
 
   const [progressCounter, setProgressCounter] = useState({
@@ -271,11 +273,18 @@ const RegisterActivity = () => {
                 updateProgressCounter("i4", e.target.checked ? "rr" : "");
               }}
             />
-            <label htmlFor="radio-button" className={styles.label}>
+            <label htmlFor="radio-button" className={`${styles.label} cursor-pointer no-underline hover:underline decoration-indigo-500`} onClick={() => setShowTC(!showTC)}>
               I Agree with the terms and conditions{" "}
               <span className="text-red-500 text-lg">*</span>
             </label>
           </div>
+          {
+              showTC && <div className="my-2 p-2 text-white border-2 border-indigo-500 rounded">
+                <h1 className='text-sm font-bold'>Terms and conditions</h1>
+                <p className='text-xs font-semibold'>1. If you fail to attend two or more classes, you will not receive a certificate.</p>
+                <p className='text-xs font-semibold'>2. If you arrive more than 10 minutes late, you will be marked as absent.</p>
+              </div>
+            }
 
           <Progress value={progressCounter.step * 20} className="mt-2" />
           <p className={styles.label}>
