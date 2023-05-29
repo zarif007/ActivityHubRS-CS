@@ -41,8 +41,8 @@ const Activity = ({ params }: PageParams) => {
               <Image
                 alt="Activity Image"
                 className="object-center h-full w-full"
-                height={100}
-                width={100}
+                height={200}
+                width={200}
                 src={activityState.activityId.image}
                 blurDataURL={activityState.activityId.image}
                 placeholder='blur'
