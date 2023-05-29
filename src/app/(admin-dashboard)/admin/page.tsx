@@ -10,7 +10,8 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const registrationDays = [0, 1, 2, 3];
+const registrationDays = ['Civic Engagement', 'Activity Day 1', 'Activity Day 2', 'Activity Day 3']
+
 
 interface activityRegistrationInfoInterface {
   _id?: string;
@@ -159,10 +160,10 @@ const AdminDashboard = () => {
               <option value="">Select registration date</option>
               
               {
-                registrationDays.map((day: number) => (
-                  <option key={day} value={day}>
+                registrationDays.map((day: string, index: number) => (
+                  <option key={index} value={index}>
                     {day}
-                </option>
+                  </option>
                 ))
               }
             </select>
@@ -178,7 +179,9 @@ const AdminDashboard = () => {
             </Link>
           </div>
 
-          <ActivityRegStudentTable registrationInfo={registrationInfo} />
+          {
+            registrationInfo.length > 0 && <ActivityRegStudentTable registrationInfo={registrationInfo} />
+          }
         </div>
       )}
     </div>

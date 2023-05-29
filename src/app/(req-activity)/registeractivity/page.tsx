@@ -10,6 +10,7 @@ import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import { ActivityInterface } from "@/types/activity";
 import { toast } from "@/components/ui/Toast";
 import { Progress } from "@/components/ui/Progress";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { StudentInterface } from "@/types/student";
 import { ActivityStateInterface } from "@/types/activityState";
 // import { useSession } from "next-auth/react";
@@ -41,7 +42,7 @@ const RegisterActivity = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean | null>(null);
 
   const [error, setError] = useState<string>("");
 
@@ -311,7 +312,12 @@ const RegisterActivity = () => {
               </>
             )}
           </button>
-        </form> : <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
+        </form> : <>
+          {
+            isOpen === null ? <LoadingSpinner /> : 
+            <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
+          }
+        </>
       }
     </div>
   );

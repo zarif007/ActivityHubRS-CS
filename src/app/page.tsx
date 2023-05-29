@@ -46,7 +46,7 @@ export default function Home() {
       </button>
       <button
         className={styles.button}
-        onClick={() => router.push("/workshops")}
+        onClick={() => router.push("/civic-engagements")}
       >
         <GiStairsGoal className="w-8 h-8 " />
         <p>Civic Engagements</p>

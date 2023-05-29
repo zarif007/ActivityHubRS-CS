@@ -12,6 +12,7 @@ export interface ActivityInterface {
     classTime: string;
     venue: string;
     ds: string;
+    type?: string;
     instructor: InstructorInterface;
     createdAt?: string;
     updatedAt?: string;
