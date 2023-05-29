@@ -281,8 +281,8 @@ const RegisterActivity = () => {
           {
               showTC && <div className="my-2 p-2 text-white border-2 border-indigo-500 rounded">
                 <h1 className='text-sm font-bold'>Terms and conditions</h1>
-                <p className='text-xs font-semibold'>1. If you fail to attend two or more classes, you will not receive a certificate.</p>
-                <p className='text-xs font-semibold'>2. If you arrive more than 10 minutes late, you will be marked as absent.</p>
+                <p className='text-xs font-semibold'>1. If you fail to attend two classes, you will not receive the certificate.</p>
+                <p className='text-xs font-semibold'>2. You will be marked as absent if you are late for 5 minutes in your class.</p>
               </div>
             }
 
