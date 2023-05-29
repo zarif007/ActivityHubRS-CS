@@ -315,7 +315,7 @@ const RegisterActivity = () => {
         </form> : <>
           {
             isOpen === null ? <LoadingSpinner /> : 
-            <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on June 4th/5th/6th</h1>
+            <h1 className="text-3xl font-bold text-white">Registration is closed. Will reopen on the <span className="text-indigo-500">30th May, 2023 at 11AM</span></h1>
           }
         </>
       }

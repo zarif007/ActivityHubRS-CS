@@ -7,6 +7,8 @@ import React,{ useEffect, useState } from "react";
 import Loading from "./loading";
 import { ActivityStateInterface } from "@/types/activityState";
 import Image from "next/image";
+import Link from "next/link";
+import { colorSchema } from "@/lib/ColorSchema";
 
 interface PageParams {
   params: {
@@ -15,6 +17,10 @@ interface PageParams {
 }
 
 const Activity = ({ params }: PageParams) => {
+  const styles = {
+    button: `${colorSchema.button} mt-2 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
+  };
+
   const [activityState, setActivityState] = useState<ActivityStateInterface | null>(null);
   
   useEffect(() => {
@@ -96,6 +102,12 @@ const Activity = ({ params }: PageParams) => {
                     ))
                   }
                 </p>
+                <Link
+                  href={'/registeractivity'}
+                  className={styles.button}
+                >
+                  Enroll
+                </Link>
               </div>
             </div>
           </div>

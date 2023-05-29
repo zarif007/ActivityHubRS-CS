@@ -53,12 +53,12 @@ const AdminDashboard = () => {
     _id: '0',
   });
 
-  const handleSecretkeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSecretKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    if (secretKey === 'ABCD') {
+    if (secretKey === 'g6~(BDOE;.&]YjwwkZH]bBV~X!dGMx') {
       setIsAdmin(true)
     } else {
       setError('Invalid Secret key')
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
   return (
     <div className={styles.wrapper}>
       {!isAdmin ? (
-        <form onSubmit={handleSecretkeySubmit} className="w-full max-w-lg">
+        <form onSubmit={handleSecretKeySubmit} className="w-full max-w-lg">
           <label className={styles.label}>Secret key</label>
           <Input
             defaultValue={secretKey}
