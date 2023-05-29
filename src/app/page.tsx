@@ -21,7 +21,10 @@ export default function Home() {
         onClick={() => router.push("/activities")}
       >
         <GiStairsGoal className="w-8 h-8" />
-        <p>View extra curricular activities</p>
+        <div>
+          <p>View activities</p>
+          <p className="text-sm">extra co curricular</p>
+        </div>
       </button>
       <button
         className={styles.button}
