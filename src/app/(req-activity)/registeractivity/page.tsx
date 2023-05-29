@@ -194,7 +194,7 @@ const RegisterActivity = () => {
   return (
     <div className={styles.wrapper}>
       {
-        isOpen ? <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+        !isOpen ? <form className="w-full max-w-lg" onSubmit={handleSubmit}>
           {/* Top heading */}
           <h1 className="text-4xl font-extrabold mb-5 text-white flex space-x-2 justify-center items-center">
             <p>Register Activity</p>
@@ -300,8 +300,9 @@ const RegisterActivity = () => {
               <p>{studentInfo.name}</p>
               <p>ID: {studentInfo.studentId}</p>
               <p>
-                Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
-                {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)}
+                {/* Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
+                {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)} */}
+                {studentInfo.phoneNumber}
               </p>
             </div>
           )}
