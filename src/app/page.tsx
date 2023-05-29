@@ -21,7 +21,7 @@ export default function Home() {
         onClick={() => router.push("/activities")}
       >
         <GiStairsGoal className="w-8 h-8" />
-        <p>View activities</p>
+        <p>View extra curricular activities</p>
       </button>
       <button
         className={styles.button}
@@ -49,7 +49,10 @@ export default function Home() {
         onClick={() => router.push("/civic-engagements")}
       >
         <GiStairsGoal className="w-8 h-8 " />
-        <p>Civic Engagements</p>
+        <div>
+          <p>Civic Engagements</p>
+          <p className="text-sm">(Project Srijon)</p>
+        </div>
       </button>
     </main>
   );

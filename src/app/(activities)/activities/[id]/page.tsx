@@ -51,7 +51,7 @@ const Activity = ({ params }: PageParams) => {
               />
             </div>
             <div className="flex flex-col-reverse sm:flex-row mt-10">
-              <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+              <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8 mt-4">
                 <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-800 text-gray-600">
                   {activityState.activityId.instructor.image ? (
                     <img
