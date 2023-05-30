@@ -6,6 +6,7 @@ export interface ActivityStateInterface {
     session: string;
     totalSeat: number;
     bookedSeat: number;
+    registrationDay: number;
     createdAt?: string;
     updatedAt?: string;
     __v?: number
