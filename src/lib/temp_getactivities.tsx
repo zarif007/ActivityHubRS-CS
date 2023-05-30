@@ -334,17 +334,31 @@ export const stringifiedList = `
     9. App Development 
     10. Animated Film Making - Beginner Level 
     11. Martial art
-    12. Presentation Skills Section-1 
-    13. Presentation Skills Section-2 
+    12. Presentation Skills
+    13. E- Game development 
     14. German Language 
     15. France Language 
-    16. Japanese Language Section-1 
+    16. Japanese Language
     17. Zumba 
     18. Taekwondo
     19. Yoga & Meditation 
-    20. Yoga & Meditation 
+    20. Animated Film Making Advance
     21. Amra Notun Network Morning 
     22. Amra Notun Network Evening 
+    23. Graphics Design- Beginner level
+    24. Graphics Design- Advance level
+    25. Web Development Beginner
+    26. Web Development Advance
+    27. Jewellery Making
+    28. Guiter Advanced level
+    29. Block & Batik Design
+    30. TV News Presentation
+    31. Stage Drama
+    31. Spanish Language
+    32. German Language
+    33. Chinese Language
+    34. Korean Language
+    35. Painting
     `
 
 export default allActivities;
