@@ -21,7 +21,7 @@ const Activities = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`${apiEndpointV1}/activitystate?registrationDay=0`);
+      const res = await axios.get(`${apiEndpointV1}/activitystate`);
       setActivityStates(res.data.data);
       setFilteredActivityStates(res.data.data);
     };
