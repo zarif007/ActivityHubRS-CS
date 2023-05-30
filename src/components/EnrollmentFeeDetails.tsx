@@ -20,10 +20,10 @@ const EnrollmentFeeDetails = () => {
         Fee Deposit Information
       </h3>
       <p>
-        <span className="text-white">Day: </span> {info[0].day}
+        <span className="text-white">Day: </span> {info[1].day}
       </p>
       <p>
-        <span className="text-white">Venue: </span> {info[0].venue}
+        <span className="text-white">Venue: </span> {info[1].venue}
       </p>
     </div>
   );
