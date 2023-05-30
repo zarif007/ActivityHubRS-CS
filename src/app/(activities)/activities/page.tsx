@@ -19,15 +19,12 @@ const Activities = () => {
     ActivityStateInterface[] | null
   >(null);
 
-  const [regDay, setRegDay] = useState<number>(5)
-
   useEffect(() => {
     const getData = async () => {
       const regInfo = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
       const res = await axios.get(`${apiEndpointV1}/activitystate`);
-      setActivityStates(res.data.data);
-      setFilteredActivityStates(res.data.data);
-      setRegDay(regInfo.data.data[0].registrationDay)
+      setActivityStates(res.data.data.filter((d: ActivityStateInterface) => d.registrationDay >= regInfo.data.data[0].registrationDay));
+      setFilteredActivityStates(res.data.data.filter((d: ActivityStateInterface) => d.registrationDay >= regInfo.data.data[0].registrationDay));
     };
     getData();
   }, []);
@@ -75,11 +72,7 @@ const Activities = () => {
                   (activityState: ActivityStateInterface, index: number) => {
                     return (
                       <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
-                        {
-                          activityState.registrationDay >= regDay && <div>
-                          <ActivityCard activityState={activityState} />
-                        </div>
-                        }
+                        <ActivityCard activityState={activityState} />
                       </div>
                     );
                   }
