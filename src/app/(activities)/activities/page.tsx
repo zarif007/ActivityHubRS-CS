@@ -74,9 +74,9 @@ const Activities = () => {
                 filteredActivityStates.map(
                   (activityState: ActivityStateInterface, index: number) => {
                     return (
-                      <div key={index}>
+                      <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
                         {
-                          activityState.registrationDay >= regDay && <div className="xl:w-1/4 md:w-1/2 w-full p-4">
+                          activityState.registrationDay >= regDay && <div>
                           <ActivityCard activityState={activityState} />
                         </div>
                         }
