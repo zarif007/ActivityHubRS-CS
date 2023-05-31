@@ -46,6 +46,16 @@ const AdminDashboard = () => {
 
   const [registrationInfo, setRegistrationInfo] = useState<RegistrationInterface[]>([]);
 
+  const [overallSeatStatus, setOverallSeatStatus] = useState<{
+    totalBookedSeat: number;
+    totalSeat: number;
+    _id: string;
+  }>({
+    _id: '',
+    totalBookedSeat: 0,
+    totalSeat: 0,
+  });
+
   const [activityRegistrationInfo, setActivityRegistrationInfo] = useState<activityRegistrationInfoInterface>({
     isRegistrationOpen: true,
     registrationDay: 1,
@@ -71,7 +81,9 @@ const AdminDashboard = () => {
 
     const getInfo = async () => {
       const res = await axios.get(`${apiEndpointV1}/registration`)
+      const ss = await axios.get(`${apiEndpointV1}/activityState/seatStatus/all`)
       setRegistrationInfo(res.data.data)
+      setOverallSeatStatus(ss.data.data[0])
     }
 
     getInfo()
@@ -169,6 +181,10 @@ const AdminDashboard = () => {
             </select>
             </div> : <h1 className="text-white font-semibold">Loading....</h1>
           }
+
+          <h1 className="my-2 font-bold text-3xl text-indigo-500">Seat Status</h1>
+          <h1 className="my-2 font-bold text-2xl text-white"> <span className="text-indigo-500">{overallSeatStatus.totalBookedSeat}/{overallSeatStatus.totalSeat}</span> till {overallSeatStatus._id}</h1>
+
           <div className="flex items-center justify-between">
             <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
             <Link
