@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { colorSchema } from "@/lib/ColorSchema";
 
+const registrationDays = ['6th of June', '7th of June', '8th of June'];
+
 const ActivityCard = ({
   activityState,
 }: {
@@ -38,6 +40,9 @@ const ActivityCard = ({
           {activityState.activityId.name}
         </div>
       </Link>
+      <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
+        SignUp date: {registrationDays[activityState.registrationDay - 1]}
+      </h3>
       <h3
         className={`tracking-widest ${
           activityState.bookedSeat < activityState.totalSeat

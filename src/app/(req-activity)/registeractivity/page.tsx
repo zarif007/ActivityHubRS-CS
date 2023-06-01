@@ -13,6 +13,7 @@ import { Progress } from "@/components/ui/Progress";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { StudentInterface } from "@/types/student";
 import { ActivityStateInterface } from "@/types/activityState";
+import Link from "next/link";
 // import { useSession } from "next-auth/react";
 
 interface RegistrationInputsInterface {
@@ -329,7 +330,10 @@ const RegisterActivity = () => {
           } */}
           {
             isOpen === null ? <LoadingSpinner /> : 
-            <h1 className="text-3xl font-bold text-white">Registration for Civic Engagement is closed! Will open for other activities<span className="text-indigo-500"> very soon </span></h1>
+            <div>
+              <h1 className="text-3xl font-bold text-white">Registration for RS activities will start<span className="text-indigo-500 uppercase"> very soon </span></h1>
+              <Link href='/activity-enrollment-schedule'><p className="mt-8 text-lg text-indigo-500 font-semibold text-center">In the meantime click here visit sign up schedule 📅</p></Link>
+            </div>
           }
         </>
       }

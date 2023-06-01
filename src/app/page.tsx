@@ -32,7 +32,7 @@ export default function Home() {
       >
         <AiOutlineSchedule className="w-8 h-8 text-white" />
         <div>
-          <p>Enrollment Schedule</p>
+          <p>SignUp Schedule</p>
         </div>
       </button>
       <button
