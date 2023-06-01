@@ -5,6 +5,7 @@ import React from "react";
 import { GiPublicSpeaker, GiStairsGoal } from "react-icons/gi";
 import { MdAppRegistration } from "react-icons/md";
 import { BsPersonWorkspace } from "react-icons/bs";
+import { AiOutlineSchedule } from "react-icons/ai";
 
 export default function Home() {
   const router = useRouter();
@@ -23,6 +24,15 @@ export default function Home() {
         <GiStairsGoal className="w-8 h-8" />
         <div>
           <p>View RS activities</p>
+        </div>
+      </button>
+      <button
+        className={styles.button}
+        onClick={() => router.push("/activity-enrollment-schedule")}
+      >
+        <AiOutlineSchedule className="w-8 h-8 text-white" />
+        <div>
+          <p>Enrollment Schedule</p>
         </div>
       </button>
       <button
@@ -46,7 +56,7 @@ export default function Home() {
         <BsPersonWorkspace className="w-8 h-8 " />
         <p>Workshops</p>
       </button>
-      <button
+      {/* <button
         className={styles.button}
         onClick={() => router.push("/civic-engagements")}
       >
@@ -55,7 +65,7 @@ export default function Home() {
           <p>Civic Engagements</p>
           <p className="text-sm">(Project Srijon)</p>
         </div>
-      </button>
+      </button> */}
     </main>
   );
 }
