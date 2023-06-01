@@ -11,7 +11,6 @@ import ActivityCard from "@/components/ui/ActivityCard";
 import EnrollmentFeeDetails from "@/components/EnrollmentFeeDetails";
 
 const Activities = () => {
-  
   const [activityStates, setActivityStates] = useState<
     ActivityStateInterface[] | null
   >(null);
@@ -21,10 +20,32 @@ const Activities = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const regInfo = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
+      const regInfo = await axios.get(
+        `${apiEndpointV1}/admin?session=Summer2023`
+      );
       const res = await axios.get(`${apiEndpointV1}/activitystate`);
-      setActivityStates(res.data.data.filter((d: ActivityStateInterface) => d.registrationDay >= regInfo.data.data[0].registrationDay));
-      setFilteredActivityStates(res.data.data.filter((d: ActivityStateInterface) => d.registrationDay >= regInfo.data.data[0].registrationDay));
+      setActivityStates(
+        res.data.data
+          .sort(
+            (a: ActivityStateInterface, b: ActivityStateInterface) =>
+              a.registrationDay - b.registrationDay
+          )
+          .filter(
+            (d: ActivityStateInterface) =>
+              d.registrationDay >= regInfo.data.data[0].registrationDay
+          )
+      );
+      setFilteredActivityStates(
+        res.data.data
+          .sort(
+            (a: ActivityStateInterface, b: ActivityStateInterface) =>
+              a.registrationDay - b.registrationDay
+          )
+          .filter(
+            (d: ActivityStateInterface) =>
+              d.registrationDay >= regInfo.data.data[0].registrationDay
+          )
+      );
     };
     getData();
   }, []);

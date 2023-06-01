@@ -132,6 +132,14 @@ function generatePrompt(prompt: string) {
     activity: Painting/ Folk art 
     Domain: I am interested in animation
     activity: Animated Film Making - Beginner Level 
+    Domain: I love coding
+    activity: Web Development Beginner
+    Domain: I love web
+    activity: Web Development Beginner
+    Domain: I love programming
+    activity: Web Development Advance
+    Domain: I am a pro coder
+    activity: Web Development Advance
     Domain: ${capitalizedPrompt}
     activity:`;
 }
