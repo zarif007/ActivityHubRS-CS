@@ -6,17 +6,9 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const activityEnrollmentSchedule = () => {
+const ActivityEnrollmentSchedule = () => {
   const [activities, setActivities] = useState<ActivityStateInterface[]>([]);
   const [counter, setCounter] = useState<number>(0);
-
-  const Increment = () => {
-    setCounter(counter + 1);
-    console.log('ewe')
-    return (
-      <></>
-    )
-  }
 
   useEffect(() => {
     const getData = async () => {
@@ -62,4 +54,4 @@ const ShowDayWise = ({activities, day}: { activities: ActivityStateInterface[], 
   )
 }
 
-export default activityEnrollmentSchedule;
+export default ActivityEnrollmentSchedule;
