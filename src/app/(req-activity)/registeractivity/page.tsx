@@ -14,6 +14,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { StudentInterface } from "@/types/student";
 import { ActivityStateInterface } from "@/types/activityState";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 // import { useSession } from "next-auth/react";
 
 interface RegistrationInputsInterface {
@@ -38,6 +39,8 @@ const RegisterActivity = () => {
   // const { data: session } = useSession();
 
   // console.log('email', session?.user?.email);
+
+  const router = useRouter();
 
   const [isTCChecked, setIsTCChecked] = useState<boolean>(false);
 
@@ -177,7 +180,7 @@ const RegisterActivity = () => {
         `${apiEndpointV1}/registration`,
         regObj
       );
-      const { smsResponse } = data.data;
+      const { smsResponse, registration } = data.data;
       if (data.success === true && smsResponse[0].status === "SENT") {
         toast({
           title: "Success",
@@ -185,6 +188,7 @@ const RegisterActivity = () => {
           type: "success",
         });
       }
+      router.push(`/registration/${registration._id}`)
     } catch (err: any) {
       registrationErrorHandling(err.response.data.message);
     } finally {
@@ -271,6 +275,7 @@ const RegisterActivity = () => {
               checked={isTCChecked}
               onChange={(e) => {
                 setIsTCChecked(e.target.checked);
+                setShowTC(true)
                 updateProgressCounter("i4", e.target.checked ? "rr" : "");
               }}
             />
@@ -282,8 +287,9 @@ const RegisterActivity = () => {
           {
               showTC && <div className="my-2 p-2 text-white border-2 border-indigo-500 rounded">
                 <h1 className='text-sm font-bold'>Terms and conditions</h1>
-                <p className='text-xs font-semibold'>1. If you fail to attend two classes, you will not receive the certificate.</p>
-                <p className='text-xs font-semibold'>2. You will be marked as absent if you are late for 5 minutes in your class.</p>
+                <p className='text-xs font-semibold'>1. You must confirm your payment after completion of Activity registration.</p>
+                <p className='text-xs font-semibold'>2. If you fail to attend two classes, you will not receive the certificate.</p>
+                <p className='text-xs font-semibold'>3. You will be marked as absent if you are late for 5 minutes in your class.</p>
               </div>
             }
 

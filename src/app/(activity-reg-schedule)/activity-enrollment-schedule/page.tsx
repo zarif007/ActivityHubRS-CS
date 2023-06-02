@@ -21,7 +21,7 @@ const ActivityEnrollmentSchedule = () => {
     getData();
   }, []);
   return (
-    <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900 px-2">
+    <div className="flex space-y-4 min-h-screen flex-col items-center justify-center py-24 max-w-5xl w-full mx-auto">
       <div className="flex flex-wrap w-full mb-8">
         <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <h1 className="sm:text-3xl text-2xl font-bold title-font mb-2 text-white">
