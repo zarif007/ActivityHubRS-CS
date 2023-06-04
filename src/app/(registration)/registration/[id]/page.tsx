@@ -24,6 +24,8 @@ const Registration = ({ params }: PageParams) => {
 
   const [registration, setRegistration] =
     useState<RegistrationInterface | null>(null);
+  const [registrationDay, setRegistrationDay] =
+    useState<number>(0);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,13 +33,17 @@ const Registration = ({ params }: PageParams) => {
         `${apiEndpointV1}/registration?_id=${params.id}`
       );
       setRegistration(res.data.data[0]);
+      const dRes = await axios.get(
+        `${apiEndpointV1}/activitystate/${res.data.data[0].activityId._id}`
+      )
+      setRegistrationDay(dRes.data.data.registrationDay)
     };
     getData();
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      {registration ? (
+      {(registration) ? (
         <div className="mx-2">
           <div className="flex justify-end my-1">
             <ScreenShotTaker currentRef={ref} imgName={`Registration of ${registration.studentId.name}`} />
@@ -52,8 +58,8 @@ const Registration = ({ params }: PageParams) => {
             </h1>
             <div className="text-white rounded font-semibold my-4">
               <span className="text-indigo-500 font-semibold">Note: </span> Now
-              full fill payment to confirm your enrollment
-              <EnrollmentFeeDetails />
+              pay the enrollment fee to get the final confirmation
+              <EnrollmentFeeDetails day={registrationDay} />
             </div>
             <h1 className="text-2xl font-bold text-indigo-500">
               Student Information

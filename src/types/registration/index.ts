@@ -6,6 +6,7 @@ export interface RegistrationInterface {
     studentId: StudentInterface;
     activityId: ActivityInterface;
     session: string;
+    paymentStatus?: boolean;
     createdAt?: string;
     updatedAt?: string;
     __v?: number;
