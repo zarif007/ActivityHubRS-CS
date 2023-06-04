@@ -8,6 +8,7 @@ import EnrollmentFeeDetails from "@/components/EnrollmentFeeDetails";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ScreenShotTaker from "@/components/ScreenShotTaker";
 import { colorSchema } from "@/lib/ColorSchema";
+import QRCodeGenerator from "@/components/QRCodeGenerator";
 
 interface PageParams {
   params: {
@@ -56,11 +57,17 @@ const Registration = ({ params }: PageParams) => {
               Registration ID:{" "}
               <span className="text-indigo-500">{params.id}</span>
             </h1>
-            <div className="text-white rounded font-semibold my-4">
-              <span className="text-indigo-500 font-semibold">Note: </span> Now
-              pay the enrollment fee to get the final confirmation
-              <EnrollmentFeeDetails day={registrationDay} />
-            </div>
+            <h1 className="text-2xl font-bold text-white">
+              Payment Status:{" "}
+              <span className={`${registration.paymentStatus === 'Unpaid' ? 'text-red-500' : 'text-green-400'} uppercase`}>{registration.paymentStatus}</span>
+            </h1>
+            {
+              registration.paymentStatus === 'Unpaid' && <div className="text-white rounded font-semibold my-4">
+                <span className="text-indigo-500 font-semibold">Note: </span> Now
+                pay the enrollment fee to get the final confirmation
+                <EnrollmentFeeDetails day={registrationDay} />
+              </div>
+            }
             <h1 className="text-2xl font-bold text-indigo-500">
               Student Information
             </h1>
@@ -95,6 +102,7 @@ const Registration = ({ params }: PageParams) => {
               />
               <ShowInfo title="Venue" text={registration.activityId.venue} />
             </div>
+            <QRCodeGenerator value={`https://activityhubrs.vercel.app/registration/${registration._id}`} />
           </div>
         </div>
       ) : (
