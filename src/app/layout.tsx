@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/Toast";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Toaster position="bottom-center" />
         <Navbar />
         <body>{children}</body>
+        <Footer />
     </html>
   );
 }

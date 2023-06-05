@@ -16,7 +16,9 @@ const EnrollmentFeeDetails = ({ day }: { day: number }) => {
             {
               paymentDays.map((d: string, index: number) => (
                 <p key={index} className="text-indigo-500">
-                  <span className="text-white">Date ({activityDayNames[index]}): </span> {d} 
+                  {
+                    index !== 0 && <><span className="text-white">Date ({activityDayNames[index]}): </span> {d}</> 
+                  }
                 </p>
               ))
             }
