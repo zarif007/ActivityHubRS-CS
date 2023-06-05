@@ -8,6 +8,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Footer";
+import SplitBeeAnalytics from "@/components/SplitBeeAnalytics";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +28,7 @@ export default function RootLayout({
       
         <GoogleAnalytics />
         <Analytics />
+        <SplitBeeAnalytics />
         <Colorhydration />
         <Toaster position="bottom-center" />
         <Navbar />
