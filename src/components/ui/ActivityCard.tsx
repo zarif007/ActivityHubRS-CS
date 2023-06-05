@@ -36,8 +36,11 @@ const ActivityCard = ({
         Registration Fee: {activityState.activityId.price}
       </h3>
       <Link href={`/activities/${activityState.activityId._id}`}>
-        <div className="text-lg text-white font-medium title-font mb-6 h-8 truncate">
-          {activityState.activityId.name}
+        <div className="text-lg text-white font-medium title-font mb-6 h-8">
+          {activityState.activityId.name.slice(0, 35)}
+          {
+            activityState.activityId.name.length > 35 && '...'
+          }
         </div>
       </Link>
       <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase">
