@@ -21,7 +21,7 @@ const ActivityEnrollmentSchedule = () => {
     getData();
   }, []);
   return (
-    <div className="flex space-y-4 min-h-screen flex-col items-center justify-center py-24 max-w-5xl w-full mx-auto">
+    <div className="flex space-y-4 min-h-screen flex-col items-center justify-center py-24 max-w-5xl w-full mx-auto px-2">
       <div className="flex flex-wrap w-full mb-8">
         <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
           <h1 className="sm:text-3xl text-2xl font-bold title-font mb-2 text-white">
@@ -30,8 +30,10 @@ const ActivityEnrollmentSchedule = () => {
           <div className="h-1 w-20 bg-indigo-500 rounded"></div>
         </div>
       </div>
+      
       {
         activities ? <div>
+          <p className="text-sm font-bold my-2 text-white border-2 border-indigo-500 rounded p-2">Activity registration window: 11AM - 11PM ⏰</p>
           <ShowDayWise activities={activities} day={1} />
           <ShowDayWise activities={activities} day={2} />
           <ShowDayWise activities={activities} day={3} />
