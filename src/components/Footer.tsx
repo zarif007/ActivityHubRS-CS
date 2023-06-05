@@ -23,6 +23,11 @@ const Footer = () => {
             <Link href="https://www.facebook.com/danialcodes/" target="_blank"><GrFacebook className="cursor-pointer w-8 h-8 text-blue-600" /> </Link>
             <Link href="https://github.com/danialcodes" target="_blank"><BsGithub className="w-8 h-8 text-white" /> </Link>
         </div>
+        <div className="flex justify-center items-center tracking-wide space-x-3 my-2">
+            <p>🤖 J Samir (BracU CSE)</p> 
+            <Link href="https://www.facebook.com/jskhan724" target="_blank"><GrFacebook className="cursor-pointer w-8 h-8 text-blue-600" /> </Link>
+            <Link href="https://github.com/wannabeSE" target="_blank"><BsGithub className="w-8 h-8 text-white" /> </Link>
+        </div>
         
     </footer>
   )
