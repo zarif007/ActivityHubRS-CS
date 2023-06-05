@@ -36,7 +36,7 @@ const ActivityCard = ({
         Registration Fee: {activityState.activityId.price}
       </h3>
       <Link href={`/activities/${activityState.activityId._id}`}>
-        <div className="text-lg text-white font-medium title-font mb-6 h-8">
+        <div className="text-lg text-white font-medium title-font mb-6 h-8 truncate">
           {activityState.activityId.name}
         </div>
       </Link>

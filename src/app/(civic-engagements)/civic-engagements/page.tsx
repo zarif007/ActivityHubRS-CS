@@ -18,8 +18,8 @@ const CivicEngagements = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`${apiEndpointV1}/activitystate?registrationDay=0`);
-      setActivityStates(res.data.data);
+      const res = await axios.get(`${apiEndpointV1}/activitystate?registrationDay=1`);
+      setActivityStates(res.data.data.filter((x: ActivityStateInterface) => x.activityId.type === 'Civic'));
     };
     getData();
   }, []);
@@ -38,7 +38,7 @@ const CivicEngagements = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <EnrollmentFeeDetails day={0} />
+            <EnrollmentFeeDetails day={1} />
             <div className="flex flex-wrap -m-4">
               {activityStates.length > 0 &&
                 activityStates.map(

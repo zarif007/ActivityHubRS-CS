@@ -44,6 +44,16 @@ export default function Home() {
       </button>
       <button
         className={styles.button}
+        onClick={() => router.push("/civic-engagements")}
+      >
+        <GiStairsGoal className="w-8 h-8 " />
+        <div>
+          <p>Civic Engagements</p>
+          <p className="text-sm">(Project সহাযাত্রী)</p>
+        </div>
+      </button>
+      <button
+        className={styles.button}
         onClick={() => router.push("/seminars")}
       >
         <GiPublicSpeaker className="w-8 h-8" />
@@ -56,16 +66,7 @@ export default function Home() {
         <BsPersonWorkspace className="w-8 h-8 " />
         <p>Workshops</p>
       </button>
-      {/* <button
-        className={styles.button}
-        onClick={() => router.push("/civic-engagements")}
-      >
-        <GiStairsGoal className="w-8 h-8 " />
-        <div>
-          <p>Civic Engagements</p>
-          <p className="text-sm">(Project Srijon)</p>
-        </div>
-      </button> */}
+      
     </main>
   );
 }
