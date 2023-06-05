@@ -49,7 +49,7 @@ export default function Home() {
         <GiStairsGoal className="w-8 h-8 " />
         <div>
           <p>Civic Engagements</p>
-          <p className="text-sm">(Project সহাযাত্রী)</p>
+          <p className="text-sm">(Project সহযাত্রী)</p>
         </div>
       </button>
       <button
