@@ -23,6 +23,7 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "html-to-image": "^1.11.11",
+    "js-cookie": "^3.0.5",
     "next": "^13.4.2",
     "next-auth": "^4.22.1",
     "nextjs-progressbar": "^0.0.16",
@@ -41,6 +42,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.3",
     "@types/nprogress": "^0.2.0"
   }
 }

@@ -3,6 +3,8 @@
 import { ActivityRegStudentTable } from "@/components/ActivityRegStudentTable.";
 import { Input } from "@/components/ui/Input";
 import { toast } from "@/components/ui/Toast";
+import getCookie from "@/hooks/getCookie";
+import setCookie from "@/hooks/setCookie";
 import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import { colorSchema } from "@/lib/ColorSchema";
 import { RegistrationInterface } from "@/types/registration";
@@ -13,7 +15,7 @@ import React, { useEffect, useState } from "react";
 const registrationDays = ['Civic Engagement', 'Activity Day 1', 'Activity Day 2', 'Activity Day 3']
 
 
-interface activityRegistrationInfoInterface {
+interface activityRegistrationSettingsInterface {
   _id?: string;
   isRegistrationOpen: boolean;
   registrationDay: number;
@@ -56,19 +58,27 @@ const AdminDashboard = () => {
     totalSeat: 0,
   });
 
-  const [activityRegistrationInfo, setActivityRegistrationInfo] = useState<activityRegistrationInfoInterface>({
+  const [activityRegistrationSettings, setActivityRegistrationSettings] = useState<activityRegistrationSettingsInterface>({
     isRegistrationOpen: true,
     registrationDay: 1,
     session: "Summer2023",
     _id: '0',
   });
 
+  const checkSecretKey = (sKey: string) => sKey === 'g6~(BDOE;.&]YjwwkZH]bBV~X!dGMx'
+
+  useEffect(() => {
+    const sKey = getCookie('adminSecret') || ''
+    
+    if(checkSecretKey(sKey.slice(1, sKey.length - 1))) setIsAdmin(true)
+  }, [])
+
   const handleSecretKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
-    if (secretKey === 'g6~(BDOE;.&]YjwwkZH]bBV~X!dGMx') {
+    if (checkSecretKey(secretKey)) {
+      setCookie('adminSecret', JSON.stringify(secretKey))
       setIsAdmin(true)
     } else {
       setError('Invalid Secret key')
@@ -82,6 +92,8 @@ const AdminDashboard = () => {
     const getInfo = async () => {
       const res = await axios.get(`${apiEndpointV1}/registration`)
       const ss = await axios.get(`${apiEndpointV1}/activityState/seatStatus/all`)
+      const adminRes = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
+      setActivityRegistrationSettings(adminRes.data.data[0])
       setRegistrationInfo(res.data.data)
       setOverallSeatStatus(ss.data.data[0])
     }
@@ -92,7 +104,7 @@ const AdminDashboard = () => {
 
   const handleUpdateRegistrationInfo = async () => {
       const res = await axios.put(`${apiEndpointV1}/admin?session=Summer2023`, {
-        adminDashboard: activityRegistrationInfo
+        adminDashboard: activityRegistrationSettings
       })
       if(res.status === 200) {
         toast({
@@ -112,16 +124,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     if(clicked)
       handleUpdateRegistrationInfo()
-  }, [activityRegistrationInfo])
+  }, [activityRegistrationSettings])
 
-
-  useEffect(() => {
-    const getInfo = async () => {
-      const res = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
-      setActivityRegistrationInfo(res.data.data[0])
-    }
-    getInfo()
-  }, [])
 
   return (
     <div className={styles.wrapper}>
@@ -145,16 +149,16 @@ const AdminDashboard = () => {
       ) : (
         <div className="w-full max-w-5xl">
           {
-            activityRegistrationInfo._id !== '0' ? <div className="my-6 p-3 border-2 border-gray-800">
+            activityRegistrationSettings._id !== '0' ? <div className="my-6 p-3 border-2 border-gray-800">
               <h1 className="text-indigo-500 font-extrabold text-4xl mb-2">Activity Registration Controller</h1>
               <div className="flex space-x-4 items-center">
             <h1 className="my-2 font-bold text-xl text-white">Turn on registration</h1>
             <input
               type="checkbox"
               className="w-4 h-4 text-blue-500"
-              checked={activityRegistrationInfo.isRegistrationOpen}
+              checked={activityRegistrationSettings.isRegistrationOpen}
               onChange={(e) => {
-                setActivityRegistrationInfo({ ...activityRegistrationInfo, isRegistrationOpen: e.target.checked })
+                setActivityRegistrationSettings({ ...activityRegistrationSettings, isRegistrationOpen: e.target.checked })
                 setClicked(true)
               }}
             />
@@ -163,9 +167,9 @@ const AdminDashboard = () => {
           <select
               id="large"
               className={styles.select}
-              defaultValue={activityRegistrationInfo.registrationDay}
+              defaultValue={activityRegistrationSettings.registrationDay}
               onChange={(e) => {
-                setActivityRegistrationInfo({ ...activityRegistrationInfo, registrationDay: e.target.value !== "" ? parseInt(e.target.value) : 1 })
+                setActivityRegistrationSettings({ ...activityRegistrationSettings, registrationDay: e.target.value !== "" ? parseInt(e.target.value) : 1 })
                 setClicked(true)
               }}
             >
