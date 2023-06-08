@@ -337,8 +337,8 @@ const RegisterActivity = () => {
           {
             isOpen === null ? <LoadingSpinner /> : 
             <div>
-              <h1 className="text-3xl font-bold text-white">Registration for RS activities will start<span className="text-indigo-500 uppercase"> very soon </span></h1>
-              <Link href='/activity-enrollment-schedule'><p className="mt-8 text-lg text-indigo-500 font-semibold text-center">In the meantime click here visit sign up schedule 📅</p></Link>
+              <h1 className="text-3xl font-bold text-white">Registration for RS activities is<span className="text-indigo-500 uppercase"> Closed </span></h1>
+              {/* <Link href='/activity-enrollment-schedule'><p className="mt-8 text-lg text-indigo-500 font-semibold text-center">In the meantime click here visit sign up schedule 📅</p></Link> */}
             </div>
           }
         </>
