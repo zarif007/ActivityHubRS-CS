@@ -11,6 +11,7 @@ import { RegistrationInterface } from "@/types/registration";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import downloadExcel from './../../../lib/downloadExcel';
 
 const registrationDays = ['Civic Engagement', 'Activity Day 1', 'Activity Day 2', 'Activity Day 3']
 
@@ -90,11 +91,11 @@ const AdminDashboard = () => {
     if (!isAdmin) return;
 
     const getInfo = async () => {
-      const res = await axios.get(`${apiEndpointV1}/registration`)
+      // const res = await axios.get(`${apiEndpointV1}/registration`)
       const ss = await axios.get(`${apiEndpointV1}/activityState/seatStatus/all`)
       const adminRes = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
       setActivityRegistrationSettings(adminRes.data.data[0])
-      setRegistrationInfo(res.data.data)
+      // setRegistrationInfo(res.data.data)
       setOverallSeatStatus(ss.data.data[0])
     }
 
@@ -197,11 +198,19 @@ const AdminDashboard = () => {
             >
               Export
             </Link>
+            {/* <div
+              onClick={() => {
+                downloadExcel()
+              }}
+              className={styles.exportButton}
+            >
+              Export
+            </div> */}
           </div>
 
-          {
+          {/* {
             registrationInfo.length > 0 && <ActivityRegStudentTable registrationInfo={registrationInfo} />
-          }
+          } */}
         </div>
       )}
     </div>
