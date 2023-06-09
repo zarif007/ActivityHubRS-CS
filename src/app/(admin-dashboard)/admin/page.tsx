@@ -12,6 +12,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import downloadExcel from './../../../lib/downloadExcel';
+import { ActivityStateInterface } from "@/types/activityState";
 
 const registrationDays = ['Civic Engagement', 'Activity Day 1', 'Activity Day 2', 'Activity Day 3']
 
@@ -66,6 +67,8 @@ const AdminDashboard = () => {
     _id: '0',
   });
 
+  const [activities, setActivities] = useState<ActivityStateInterface[]>([])
+
   const checkSecretKey = (sKey: string) => sKey === 'g6~(BDOE;.&]YjwwkZH]bBV~X!dGMx'
 
   useEffect(() => {
@@ -92,11 +95,16 @@ const AdminDashboard = () => {
 
     const getInfo = async () => {
       // const res = await axios.get(`${apiEndpointV1}/registration`)
+      // setRegistrationInfo(res.data.data)
+
       const ss = await axios.get(`${apiEndpointV1}/activityState/seatStatus/all`)
+      setOverallSeatStatus(ss.data.data[0])
+
       const adminRes = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
       setActivityRegistrationSettings(adminRes.data.data[0])
-      // setRegistrationInfo(res.data.data)
-      setOverallSeatStatus(ss.data.data[0])
+
+      const ActivityRes = await axios.get(`${apiEndpointV1}/activityState`);
+      setActivities(ActivityRes.data.data); 
     }
 
     getInfo()
@@ -192,20 +200,39 @@ const AdminDashboard = () => {
 
           <div className="flex items-center justify-between">
             <h1 className="my-2 font-bold text-xl text-white">Registered Students to an activity</h1>
-            <Link
+            {/* <Link
               href={`${apiEndpointV1}/registration/export`}
               className={styles.exportButton}
             >
               Export
-            </Link>
+            </Link> */}
             {/* <div
               onClick={() => {
-                downloadExcel()
+                downloadExcel('Project SRIJON( ICT )')
               }}
               className={styles.exportButton}
             >
               Export
             </div> */}
+          </div>
+
+          <div className="my-3 flex flex-col">
+            <label className={styles.label}>
+              Export Registration Sheets
+            </label>
+            <select
+              id="large"
+              className={styles.select}
+              onChange={(e) => downloadExcel(e.target.value)}
+            >
+              <option value="">Select Activity</option>
+              <option value="All">All</option>
+              {activities.map((activity: ActivityStateInterface) => (
+                <option key={activity.activityId._id} value={activity.activityId.name}>
+                  {activity.activityId.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* {
