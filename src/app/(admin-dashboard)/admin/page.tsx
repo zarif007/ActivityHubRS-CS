@@ -69,7 +69,7 @@ const AdminDashboard = () => {
 
   const [activities, setActivities] = useState<ActivityStateInterface[]>([])
 
-  const checkSecretKey = (sKey: string) => sKey === 'g6~(BDOE;.&]YjwwkZH]bBV~X!dGMx'
+  const checkSecretKey = (sKey: string) => sKey === process.env.NEXT_PUBLIC_ADMIN_SECRET
 
   useEffect(() => {
     const sKey = getCookie('adminSecret') || ''
