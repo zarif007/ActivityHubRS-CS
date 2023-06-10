@@ -1,4 +1,5 @@
 export interface SeminarInterface {
+    _id?: string; 
     image: string;
     name: string;
     details: string;
@@ -6,5 +7,9 @@ export interface SeminarInterface {
     venue: string;
     registeredStudents: string[]
     date: string;
+    time?: string; 
     gender: "Both" | "Male" | "Female";
+    createdAt?: string;
+    updatedAt?: string;
+    __v?: number;
 }
