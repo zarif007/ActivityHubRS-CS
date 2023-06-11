@@ -10,77 +10,21 @@ import { WorkshopInterface } from "@/types/workshop";
 import MultiPurposeRegistrationModal from "@/components/MultiPurposeRegistration.Modal";
 import { colorSchema } from "@/lib/ColorSchema";
 
-const workshops: WorkshopInterface[] = [
-  {
-    _id: '1',
-    image: "https://i.ibb.co/7rw8FPp/Paraphrasing.png",
-    title: "Workshop on Paraphrasing",
-    objective: `This workshop aims to help the participants have a better understanding of what 
-      paraphrasing is and how to do it. The workshop includes paraphrasing exercises, and hence, 
-      will be a hands-on learning experience.`,
-    date: "Thursday, June 15, 2023",
-    time: "10am to 12pm",
-    venue: "Markuli Hall",
-    seatLimit: 50,
-    facilitators: [
-      "•  The Resource Unit",
-      "•  School of General Education (GenEd)"
-    ],
-    registeredStudents: [],
-  },
-  {
-    _id: '2',
-    image: "https://i.ibb.co/R4hGwQk/Increase-Attention-through-Yoga-and-Meditation-1.png",
-    title: "Increase Self-Awareness and Concentration through Yoga and Meditation",
-    objective: `The main objective of the workshop is to introduce the art of living a peaceful life. 
-      Moreover, the participants will get a unique opportunity to improve their self-awareness, 
-      concentration and confidence which will help them to improve their academic performance. `,
-    date: "15th June 2023 (Thursday)",
-    time: "4:30 pm- 6:00 pm",
-    venue: "Markuli Hall",
-    seatLimit: 50,
-    facilitators: [
-      "•	Safina Binte Enayet",
-      "•	Kazi Rumana Haque",
-      "•	Zayed Bin Farid ",
-    ],
-    registeredStudents: [],
-  },
-  {
-    _id: '3',
-    image: "https://i.ibb.co/R4hGwQk/Increase-Attention-through-Yoga-and-Meditation-1.png",
-    title: "Increase Self-Awareness and Concentration through Yoga and Meditation",
-    objective: `The main objective of the workshop is to introduce the art of living a peaceful life. 
-      Moreover, the participants will get a unique opportunity to improve their self-awareness, 
-      concentration and confidence which will help them to improve their academic performance. `,
-    date: "15th June 2023 (Thursday)",
-    time: "7:00 pm - 8:30 pm",
-    venue: "Markuli Hall",
-    seatLimit: 50,
-    facilitators: [
-      "•	Safina Binte Enayet",
-      "•	Kazi Rumana Haque",
-      "•	Zayed Bin Farid ",
-    ],
-    registeredStudents: [],
-  },
-]
-
 const Workshops = () => {
   const styles = {
     button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-fit py-2 px-4 max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 cursor-pointer`,
   };
-  // const [seminars, setSeminars] = useState<SeminarInterface[] | null>();
+  const [workshops, setWorkshops] = useState<WorkshopInterface[] | null>(null);
  
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const getData = async () => {
-  //     const res = await axios.get(`${apiEndpointV1}/seminar`)
-  //     setSeminars(res.data.data)
-  //   }
+    const getData = async () => {
+      const res = await axios.get(`${apiEndpointV1}/workshop`)
+      setWorkshops(res.data.data)
+    }
 
-  //   getData()
-  // }, [])
+    getData()
+  }, [])
 
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState<boolean>(false)
 
@@ -118,12 +62,14 @@ const Workshops = () => {
         </div>
       </section>
 
-      <MultiPurposeRegistrationModal 
-        isOpen={isRegistrationModalOpen} 
-        setIsOpen={setIsRegistrationModalOpen} 
-        options={workshops} 
-        dedicated={false}
-      />
+      {
+        workshops && <MultiPurposeRegistrationModal 
+          isOpen={isRegistrationModalOpen} 
+          setIsOpen={setIsRegistrationModalOpen} 
+          options={workshops} 
+          dedicated={false}
+        />
+      }
     </div>
   );
 };

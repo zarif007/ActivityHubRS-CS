@@ -95,6 +95,7 @@ const MultiPurposeRegistrationModal = ({ isOpen, setIsOpen, options, dedicated }
             setRegistrationInputs(up)
         }
 
+        console.log(registrationInputs)
         if (isLoading) return;
 
         if (!validateInputs()) return;
