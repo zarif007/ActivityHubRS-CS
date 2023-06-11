@@ -75,7 +75,12 @@ const MultiPurposeCard = ({ props }: { props: SeminarInterface | WorkshopInterfa
         </div>
       </div>
 
-      <MultiPurposeRegistrationModal isOpen={isRegistrationModalOpen} setIsOpen={setIsRegistrationModalOpen} title={isSeminar(props) ? props.name : props.title} isSeminar={isSeminar(props)}  />
+      <MultiPurposeRegistrationModal 
+        isOpen={isRegistrationModalOpen} 
+        setIsOpen={setIsRegistrationModalOpen} 
+        options={new Array(props)} 
+        dedicated={true}
+      />
     </div>
   )
 }

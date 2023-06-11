@@ -1,3 +1,4 @@
+import { StudentInterface } from '@/types/student'
 import React from 'react'
 
 const StudentInfoDisplayer = ({ studentInfo }: { studentInfo: StudentInterface }) => {

@@ -305,7 +305,7 @@ const RegisterActivity = () => {
             <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
           )}
 
-          {/* Stundet info based on valid G-Suite  */}
+          {/* Student info based on valid G-Suite  */}
           {studentInfo && <StudentInfoDisplayer studentInfo={studentInfo} /> }
 
           {/* Confirmation button */}

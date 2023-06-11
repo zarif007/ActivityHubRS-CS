@@ -7,9 +7,12 @@ import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import MultiPurposeCard from "@/components/ui/MultiPurpose.Card";
 import LoadingSpinner from './../../../components/ui/LoadingSpinner';
 import { WorkshopInterface } from "@/types/workshop";
+import MultiPurposeRegistrationModal from "@/components/MultiPurposeRegistration.Modal";
+import { colorSchema } from "@/lib/ColorSchema";
 
 const workshops: WorkshopInterface[] = [
   {
+    _id: '1',
     image: "https://i.ibb.co/7rw8FPp/Paraphrasing.png",
     title: "Workshop on Paraphrasing",
     objective: `This workshop aims to help the participants have a better understanding of what 
@@ -26,6 +29,7 @@ const workshops: WorkshopInterface[] = [
     registeredStudents: [],
   },
   {
+    _id: '2',
     image: "https://i.ibb.co/R4hGwQk/Increase-Attention-through-Yoga-and-Meditation-1.png",
     title: "Increase Self-Awareness and Concentration through Yoga and Meditation",
     objective: `The main objective of the workshop is to introduce the art of living a peaceful life. 
@@ -43,6 +47,7 @@ const workshops: WorkshopInterface[] = [
     registeredStudents: [],
   },
   {
+    _id: '3',
     image: "https://i.ibb.co/R4hGwQk/Increase-Attention-through-Yoga-and-Meditation-1.png",
     title: "Increase Self-Awareness and Concentration through Yoga and Meditation",
     objective: `The main objective of the workshop is to introduce the art of living a peaceful life. 
@@ -62,7 +67,9 @@ const workshops: WorkshopInterface[] = [
 ]
 
 const Workshops = () => {
-  
+  const styles = {
+    button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-fit py-2 px-4 max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 cursor-pointer`,
+  };
   // const [seminars, setSeminars] = useState<SeminarInterface[] | null>();
  
   // useEffect(() => {
@@ -74,16 +81,22 @@ const Workshops = () => {
 
   //   getData()
   // }, [])
+
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState<boolean>(false)
+
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
       <section className="text-gray-400 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap w-full mb-4">
-            <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <div className="flex flex-wrap w-full mb-4 justify-between">
+            <div className="mb-6 lg:mb-0">
               <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
                 RS Workshops
               </h1>
               <div className="h-1 w-20 bg-indigo-500 rounded"></div>
+            </div>
+            <div>
+              <button className={styles.button} onClick={() => setIsRegistrationModalOpen(true)}>Register</button>
             </div>
           </div>
 
@@ -104,6 +117,13 @@ const Workshops = () => {
           </section>
         </div>
       </section>
+
+      <MultiPurposeRegistrationModal 
+        isOpen={isRegistrationModalOpen} 
+        setIsOpen={setIsRegistrationModalOpen} 
+        options={workshops} 
+        dedicated={false}
+      />
     </div>
   );
 };
