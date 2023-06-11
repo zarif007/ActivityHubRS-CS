@@ -1,22 +1,25 @@
 import { SeminarInterface } from '@/types/seminar'
 import { WorkshopInterface } from '@/types/workshop'
-import React from 'react'
+import React, { useState } from 'react'
 import { BiTimeFive } from "react-icons/bi";
 import { CgPin } from "react-icons/cg";
 import { FaUsers } from "react-icons/fa";
 import Link from "next/link";
 import { colorSchema } from "@/lib/ColorSchema";
+import MultiPurposeRegistrationModal from '../MultiPurposeRegistration.Modal';
 
 
 const MultiPurposeCard = ({ props }: { props: SeminarInterface | WorkshopInterface }) => {
   const styles = {
-    button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 `,
+    button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-full max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 cursor-pointer`,
   };
+
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState<boolean>(false)
 
   const isSeminar = (props: SeminarInterface | WorkshopInterface): props is SeminarInterface => 'name' in props
 
   return (
-    <div className="p-4 md:w-1/3">
+    <div className="p-2 md:w-1/3">
       <div className="h-full border-2 border-gray-800 rounded-lg overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover object-center"
@@ -66,11 +69,13 @@ const MultiPurposeCard = ({ props }: { props: SeminarInterface | WorkshopInterfa
           </div>
         </div>
         <div className="mx-6">
-          <div className={styles.button}>
+          <div className={styles.button} onClick={() => setIsRegistrationModalOpen(true)}>
             Register
           </div>
         </div>
       </div>
+
+      <MultiPurposeRegistrationModal isOpen={isRegistrationModalOpen} setIsOpen={setIsRegistrationModalOpen} title={isSeminar(props) ? props.name : props.title} isSeminar={isSeminar(props)}  />
     </div>
   )
 }

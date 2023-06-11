@@ -15,6 +15,7 @@ import { StudentInterface } from "@/types/student";
 import { ActivityStateInterface } from "@/types/activityState";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import StudentInfoDisplayer from "@/components/StudentInfoDisplayer";
 // import { useSession } from "next-auth/react";
 
 interface RegistrationInputsInterface {
@@ -293,26 +294,20 @@ const RegisterActivity = () => {
               </div>
             }
 
+          {/* Progressbar changes based on students inputs */}
           <Progress value={progressCounter.step * 20} className="mt-2" />
           <p className={styles.label}>
             {progressCounter.step}/5 {progressEmojis[progressCounter.step - 1]}
           </p>
 
+          {/* Error msg */}
           {error !== "" && (
             <p className="my-2 text-sm font-semibold text-red-500">{error}</p>
           )}
 
-          {studentInfo && (
-            <div className="my-2 bg-indigo-500 bg-opacity-10 text-white text-sm font-semibold rounded-sm border-2 border-indigo-500 p-3">
-              <p>{studentInfo.name}</p>
-              <p>ID: {studentInfo.studentId}</p>
-              <p>
-                {/* Phone Number: 0{studentInfo.phoneNumber.slice(0, 2)}*****
-                {studentInfo.phoneNumber.slice(7, studentInfo.phoneNumber.length)} */}
-                {studentInfo.phoneNumber}
-              </p>
-            </div>
-          )}
+          {/* Stundet info based on valid G-Suite  */}
+          {studentInfo && <StudentInfoDisplayer studentInfo={studentInfo} /> }
+
           {/* Confirmation button */}
           <button
             className={`${styles.button} disabled:bg-opacity-50 disabled:cursor-not-allowed`}
