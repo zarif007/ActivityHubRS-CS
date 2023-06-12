@@ -25,6 +25,9 @@ const MultiPurposeCard = ({ props }: { props: SeminarInterface | WorkshopInterfa
           style={{ objectFit: "contain" }}
         />
         <div className="p-6">
+          {
+            !isSeminar(props) && <h3 className='tracking-widest bg-indigo-400 w-fit p-1 px-2 rounded text-white my-1 text-xs font-medium title-font uppercase'>slot: {props.slot} ({props.time})</h3>
+          }
           <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase flex flex-wrap justify-between">
             <div className="flex items-center space-x-1">
               <BiTimeFive /> <p>{!isSeminar(props) && props.time} {props.date}</p>

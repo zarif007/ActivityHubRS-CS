@@ -9,6 +9,7 @@ export interface WorkshopInterface {
     seatLimit: number;
     facilitators: string[];
     registeredStudents: string[];
+    slot?: number;
     createdAt?: string;
     updatedAt?: string;
     __v?: number;
