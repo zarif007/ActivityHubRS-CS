@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Footer";
 import SplitBeeAnalytics from "@/components/SplitBeeAnalytics";
+import QueryProvider from "@/utils/providers/QueryProvider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,10 +31,12 @@ export default function RootLayout({
         <Analytics />
         <SplitBeeAnalytics />
         <Colorhydration />
-        <Toaster position="bottom-center" />
-        <Navbar />
-        <body>{children}</body>
-        <Footer />
+        <QueryProvider>
+          <Toaster position="bottom-center" />
+          <Navbar />
+          <body>{children}</body>
+          <Footer />
+        </QueryProvider>
     </html>
   );
 }
