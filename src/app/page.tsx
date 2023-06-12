@@ -17,7 +17,7 @@ export default function Home() {
     <main className={styles.wrapper}>
       <div></div>
       {/* button groups */}
-      <button
+      {/* <button
         className={styles.button}
         onClick={() => router.push("/activities")}
       >
@@ -51,7 +51,7 @@ export default function Home() {
           <p>Civic Engagements</p>
           <p className="text-sm">(Project সহযাত্রী)</p>
         </div>
-      </button>
+      </button> */}
       <button
         className={styles.button}
         onClick={() => router.push("/seminars")}

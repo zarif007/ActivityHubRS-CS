@@ -18,6 +18,8 @@ const Activities = () => {
     ActivityStateInterface[] | null
   >(null);
 
+  const [showActivities, setShowActivities] = useState<boolean>(false);
+
   useEffect(() => {
     const getData = async () => {
       const regInfo = await axios.get(
@@ -87,18 +89,20 @@ const Activities = () => {
                 onChange={(e) => handleSearchInput(e)}
               />
             </div>
-            <div className="flex flex-wrap -m-4">
-              {filteredActivityStates.length > 0 &&
-                filteredActivityStates.map(
-                  (activityState: ActivityStateInterface, index: number) => {
-                    return (
-                      <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
-                        <ActivityCard activityState={activityState} />
-                      </div>
-                    );
-                  }
-                )}
-            </div>
+            {
+              showActivities ? <div className="flex flex-wrap -m-4">
+                {filteredActivityStates.length > 0 &&
+                  filteredActivityStates.map(
+                    (activityState: ActivityStateInterface, index: number) => {
+                      return (
+                        <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
+                          <ActivityCard activityState={activityState} />
+                        </div>
+                      );
+                    }
+                  )}
+              </div> : <h1 className="text-3xl font-bold text-white">Registration for RS activities is<span className="text-indigo-500 uppercase"> Closed </span></h1>
+            }
           </div>
         </section>
       ) : (
