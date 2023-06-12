@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SeminarInterface } from '@/types/seminar';
 import { WorkshopInterface } from '@/types/workshop';
+import MultiPurposeRegistrationModal from './MultiPurposeRegistration.Modal';
 
 const MultiPurposeDetailsPage = ({ props }: { props: SeminarInterface | WorkshopInterface }) => {
     const isSeminar = (props: SeminarInterface | WorkshopInterface): props is SeminarInterface => 'name' in props
+
+    const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState<boolean>(false)
 
     const makeLine = (text: string) => {
         return (
@@ -46,8 +49,17 @@ const MultiPurposeDetailsPage = ({ props }: { props: SeminarInterface | Workshop
                     <h1 className="my-4 text-indigo-500 font-bold text-lg">SEAT STATUS</h1>
                     <p className="text-md font-semibold">{isSeminar(props) ? props.registeredStudents.length : `${props.registeredStudents.length} / ${props.seatLimit}`}</p>
                     <div className="flex justify-center mt-4">
-                        <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</button>
+                        <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg" onClick={() => setIsRegistrationModalOpen(true)}>Register</button>
                     </div>
+
+                    {
+                        <MultiPurposeRegistrationModal 
+                            isOpen={isRegistrationModalOpen} 
+                            setIsOpen={setIsRegistrationModalOpen} 
+                            options={new Array(props)} 
+                            dedicated={true}
+                        />
+                    }
                 </div>
             </div>
         </section>

@@ -103,25 +103,26 @@ const MultiPurposeRegistrationModal = ({ isOpen, setIsOpen, options, dedicated }
         setIsLoading(true);
 
         // For now, will change for seminar later
-        if(isSeminar(options[0]) || !studentInfo?._id) return;
-        
+        if (isSeminar(options[0]) || !studentInfo?._id) return;
 
-       try {
-            const { data } = await axios.post(`${apiEndpointV1}/workshop/register/${registrationInputs.id}`, 
-            { studentId: studentInfo._id })
 
-            if(data.success === true) {
+        try {
+            const { data } = await axios.post(`${apiEndpointV1}/workshop/register/${registrationInputs.id}`,
+                { studentId: studentInfo._id })
+
+            if (data.success === true) {
                 toast({
                     title: "Success",
                     message: 'Registration successful',
                     type: "success",
-                  });
+                });
             }
-       } catch (err: any) {
-        console.log(err)
+        } catch (err: any) {
+            console.log(err)
             registrationErrorHandling(err.response.data.message);
         } finally {
-        setIsLoading(false);
+            setIsOpen(false);
+            setIsLoading(false);
         }
     }
 
