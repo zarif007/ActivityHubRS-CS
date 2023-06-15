@@ -18,7 +18,7 @@ const Activities = () => {
     ActivityStateInterface[] | null
   >(null);
 
-  const [showActivities, setShowActivities] = useState<boolean>(false);
+  const [showActivities, setShowActivities] = useState<boolean>(true);
 
   useEffect(() => {
     const getData = async () => {
