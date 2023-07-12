@@ -6,11 +6,15 @@ import axios from "axios";
 import { apiEndpointV1 } from "@/lib/ApiEndpoints";
 import MultiPurposeCard from "@/components/ui/MultiPurpose.Card";
 import LoadingSpinner from './../../../components/ui/LoadingSpinner';
+import MultiPurposeRegistrationModal from "@/components/MultiPurposeRegistration.Modal";
+import { colorSchema } from "@/lib/ColorSchema";
 
 const Seminars = () => {
-  
+  const styles = {
+    button: `${colorSchema.button} mx-auto mb-4 flex py-2 w-fit py-2 px-4 max-w-lg font-extrabold text-xl rounded-sm items-center justify-center space-x-2 hover:space-x-4 cursor-pointer`,
+  };
   const [seminars, setSeminars] = useState<SeminarInterface[] | null>();
- 
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState<boolean>(false)
   useEffect(() => {
 
     const getData = async () => {
@@ -30,6 +34,9 @@ const Seminars = () => {
                 RS Seminars
               </h1>
               <div className="h-1 w-20 bg-indigo-500 rounded"></div>
+              <div>
+                <button className={styles.button} onClick={() => setIsRegistrationModalOpen(true)}>Register</button>
+              </div>
             </div>
           </div>
 
@@ -50,6 +57,14 @@ const Seminars = () => {
           </section>
         </div>
       </section>
+      {
+        seminars && <MultiPurposeRegistrationModal 
+          isOpen={isRegistrationModalOpen} 
+          setIsOpen={setIsRegistrationModalOpen} 
+          options={seminars} 
+          dedicated={false}
+        />
+      }
     </div>
   );
 };
