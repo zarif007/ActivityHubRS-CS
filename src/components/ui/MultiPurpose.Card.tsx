@@ -31,7 +31,7 @@ const MultiPurposeCard = ({
         />
         <div className="p-6">
           {(
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap">
               <h3 className="tracking-widest bg-indigo-400 w-fit p-1 px-2 rounded text-white my-1 text-xs font-medium title-font uppercase">
               slot: {props.slot} ({props.time})
             </h3>
