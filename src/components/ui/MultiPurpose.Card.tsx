@@ -31,9 +31,16 @@ const MultiPurposeCard = ({
         />
         <div className="p-6">
           {(
-            <h3 className="tracking-widest bg-indigo-400 w-fit p-1 px-2 rounded text-white my-1 text-xs font-medium title-font uppercase">
+            <div className="flex justify-between">
+              <h3 className="tracking-widest bg-indigo-400 w-fit p-1 px-2 rounded text-white my-1 text-xs font-medium title-font uppercase">
               slot: {props.slot} ({props.time})
             </h3>
+              {
+                isSeminar(props) && <h3 className="tracking-widest bg-indigo-400 w-fit p-1 px-2 rounded text-white my-1 text-xs font-medium title-font uppercase">
+                {props.type} { props.type === "mandatory" && '(1/4)' }
+              </h3>
+              }
+            </div>
           )}
           <h3 className="tracking-widest text-indigo-400 text-xs font-medium title-font uppercase flex flex-wrap justify-between">
             <div className="flex items-center space-x-1">
