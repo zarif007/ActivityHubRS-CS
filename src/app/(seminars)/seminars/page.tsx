@@ -60,7 +60,7 @@ const Seminars = () => {
               </button>
             </div>
           </div>
-          <div className="flex justify-start">
+          {/* <div className="flex justify-start">
             <div className="flex space-x-2">
               <button
                 className={styles.button}
@@ -80,11 +80,11 @@ const Seminars = () => {
                 Optional
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <h1 className="my-2 font-bold text-lg text-indigo-500">
+          {/* <h1 className="my-2 font-bold text-lg text-indigo-500">
             {selected.text}
-          </h1>
+          </h1> */}
 
           <section className="text-gray-400 bg-gray-900 body-font">
             {filteredSeminars ? (
