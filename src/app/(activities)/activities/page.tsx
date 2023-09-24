@@ -68,7 +68,7 @@ const Activities = () => {
 
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
-      <AIActivitySuggestionModal />
+      {/* <AIActivitySuggestionModal /> */}
 
       {filteredActivityStates ? (
         <section className="text-gray-400 body-font">
@@ -89,20 +89,28 @@ const Activities = () => {
                 onChange={(e) => handleSearchInput(e)}
               />
             </div>
-            {
-              showActivities ? <div className="flex flex-wrap -m-4">
+            {showActivities ? (
+              <div className="flex flex-wrap -m-4">
                 {filteredActivityStates.length > 0 &&
                   filteredActivityStates.map(
                     (activityState: ActivityStateInterface, index: number) => {
                       return (
-                        <div key={index} className="xl:w-1/4 md:w-1/2 w-full p-4">
+                        <div
+                          key={index}
+                          className="xl:w-1/4 md:w-1/2 w-full p-4"
+                        >
                           <ActivityCard activityState={activityState} />
                         </div>
                       );
                     }
                   )}
-              </div> : <h1 className="text-3xl font-bold text-white">Registration for RS activities is<span className="text-indigo-500 uppercase"> Closed </span></h1>
-            }
+              </div>
+            ) : (
+              <h1 className="text-3xl font-bold text-white">
+                Registration for RS activities is
+                <span className="text-indigo-500 uppercase"> Closed </span>
+              </h1>
+            )}
           </div>
         </section>
       ) : (

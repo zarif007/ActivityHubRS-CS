@@ -74,10 +74,14 @@ const RegisterActivity = () => {
 
   useEffect(() => {
     const getActivities = async () => {
-      const regInfo = await axios.get(`${apiEndpointV1}/admin?session=Summer2023`)
-      const res = await axios.get(`${apiEndpointV1}/activityState?registrationDay=${regInfo.data.data[0].registrationDay}`);
+      const regInfo = await axios.get(
+        `${apiEndpointV1}/admin?session=Summer2023`
+      );
+      const res = await axios.get(
+        `${apiEndpointV1}/activityState?registrationDay=${regInfo.data.data[0].registrationDay}`
+      );
       setActivities(res.data.data);
-      setIsOpen(regInfo.data.data[0].isRegistrationOpen)
+      setIsOpen(regInfo.data.data[0].isRegistrationOpen);
     };
 
     getActivities();
@@ -173,7 +177,6 @@ const RegisterActivity = () => {
       const regObj = {
         activityId: registrationInputs.activityId,
         studentId: studentInfo._id,
-        // session: "Summer2023", default in  model, so no need
         newPhoneNumber: registrationInputs.phoneNumber,
       };
 
@@ -189,7 +192,7 @@ const RegisterActivity = () => {
           type: "success",
         });
       }
-      router.push(`/registration/${registration._id}`)
+      router.push(`/registration/${registration._id}`);
     } catch (err: any) {
       registrationErrorHandling(err.response.data.message);
     } finally {
@@ -199,8 +202,8 @@ const RegisterActivity = () => {
 
   return (
     <div className={styles.wrapper}>
-      {
-        isOpen ? <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+      {isOpen ? (
+        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
           {/* Top heading */}
           <h1 className="text-4xl font-extrabold mb-5 text-white flex space-x-2 justify-center items-center">
             <p>Register Activity</p>
@@ -261,7 +264,10 @@ const RegisterActivity = () => {
             >
               <option value="">Select Activity</option>
               {activities.map((activity: ActivityStateInterface) => (
-                <option key={activity.activityId._id} value={activity.activityId._id}>
+                <option
+                  key={activity.activityId._id}
+                  value={activity.activityId._id}
+                >
                   {activity.activityId.name} ({activity.activityId.day})
                 </option>
               ))}
@@ -276,23 +282,36 @@ const RegisterActivity = () => {
               checked={isTCChecked}
               onChange={(e) => {
                 setIsTCChecked(e.target.checked);
-                setShowTC(true)
+                setShowTC(true);
                 updateProgressCounter("i4", e.target.checked ? "rr" : "");
               }}
             />
-            <label htmlFor="radio-button" className={`${styles.label} cursor-pointer no-underline hover:underline decoration-indigo-500`} onClick={() => setShowTC(!showTC)}>
+            <label
+              htmlFor="radio-button"
+              className={`${styles.label} cursor-pointer no-underline hover:underline decoration-indigo-500`}
+              onClick={() => setShowTC(!showTC)}
+            >
               I Agree with the terms and conditions{" "}
               <span className="text-red-500 text-lg">*</span>
             </label>
           </div>
-          {
-              showTC && <div className="my-2 p-2 text-white border-2 border-indigo-500 rounded">
-                <h1 className='text-sm font-bold'>Terms and conditions</h1>
-                <p className='text-xs font-semibold'>1. You must confirm your payment after completion of Activity registration.</p>
-                <p className='text-xs font-semibold'>2. If you fail to attend two classes, you will not receive the certificate.</p>
-                <p className='text-xs font-semibold'>3. You will be marked as absent if you are late for 5 minutes in your class.</p>
-              </div>
-            }
+          {showTC && (
+            <div className="my-2 p-2 text-white border-2 border-indigo-500 rounded">
+              <h1 className="text-sm font-bold">Terms and conditions</h1>
+              <p className="text-xs font-semibold">
+                1. You must confirm your payment after completion of Activity
+                registration.
+              </p>
+              <p className="text-xs font-semibold">
+                2. If you fail to attend two classes, you will not receive the
+                certificate.
+              </p>
+              <p className="text-xs font-semibold">
+                3. You will be marked as absent if you are late for 5 minutes in
+                your class.
+              </p>
+            </div>
+          )}
 
           {/* Progressbar changes based on students inputs */}
           <Progress value={progressCounter.step * 20} className="mt-2" />
@@ -306,7 +325,7 @@ const RegisterActivity = () => {
           )}
 
           {/* Student info based on valid G-Suite  */}
-          {studentInfo && <StudentInfoDisplayer studentInfo={studentInfo} /> }
+          {studentInfo && <StudentInfoDisplayer studentInfo={studentInfo} />}
 
           {/* Confirmation button */}
           <button
@@ -324,20 +343,26 @@ const RegisterActivity = () => {
               </>
             )}
           </button>
-        </form> : <>
+        </form>
+      ) : (
+        <>
           {/* {
             isOpen === null ? <LoadingSpinner /> : 
             <h1 className="text-3xl font-bold text-white">Registration is closed. Will Open for Civic Engagements (Project Srijon) on the <span className="text-indigo-500">30th May, 2023 at 11AM</span></h1>
           } */}
-          {
-            isOpen === null ? <LoadingSpinner /> : 
+          {isOpen === null ? (
+            <LoadingSpinner />
+          ) : (
             <div>
-              <h1 className="text-3xl font-bold text-white">Registration for RS activities is<span className="text-indigo-500 uppercase"> Closed </span></h1>
+              <h1 className="text-3xl font-bold text-white">
+                Registration for RS activities is
+                <span className="text-indigo-500 uppercase"> Closed </span>
+              </h1>
               {/* <Link href='/activity-enrollment-schedule'><p className="mt-8 text-lg text-indigo-500 font-semibold text-center">In the meantime click here visit sign up schedule 📅</p></Link> */}
             </div>
-          }
+          )}
         </>
-      }
+      )}
     </div>
   );
 };

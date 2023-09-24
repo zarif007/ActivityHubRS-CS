@@ -32,7 +32,7 @@ const Seminars = () => {
         res.data.data.filter((re: any) => re.type === selected.option)
       );
     };
-    getData();
+    // getData();
   }, []);
 
   const handleFilterSeminar = (option: string, text: string) => {
@@ -51,14 +51,14 @@ const Seminars = () => {
               </h1>
               <div className="h-1 w-20 bg-indigo-500 rounded"></div>
             </div>
-            <div>
+            {/* <div>
               <button
                 className={styles.button}
                 onClick={() => setIsRegistrationModalOpen(true)}
               >
                 Register
               </button>
-            </div>
+            </div> */}
           </div>
           {/* <div className="flex justify-start">
             <div className="flex space-x-2">
@@ -86,7 +86,7 @@ const Seminars = () => {
             {selected.text}
           </h1> */}
 
-          <section className="text-gray-400 bg-gray-900 body-font">
+          {/* <section className="text-gray-400 bg-gray-900 body-font">
             {filteredSeminars ? (
               <div className="container py-4 mx-auto">
                 <div className="flex flex-wrap -m-4">
@@ -102,17 +102,20 @@ const Seminars = () => {
                 <LoadingSpinner />
               </div>
             )}
-          </section>
+          </section> */}
+          <h1 className="flex justify-center items-center py-24 text-2xl font-bold text-white">
+            Will be Announced
+          </h1>
         </div>
       </section>
-      {filteredSeminars && (
+      {/* {filteredSeminars && (
         <MultiPurposeRegistrationModal
           isOpen={isRegistrationModalOpen}
           setIsOpen={setIsRegistrationModalOpen}
           options={filteredSeminars}
           dedicated={false}
         />
-      )}
+      )} */}
     </div>
   );
 };

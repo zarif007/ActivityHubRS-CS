@@ -10,7 +10,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const CivicEngagements = () => {
+const DukeOfEdinburgh = () => {
   const [activityStates, setActivityStates] = useState<
     ActivityStateInterface[] | null
   >(null);
@@ -22,7 +22,7 @@ const CivicEngagements = () => {
       );
       setActivityStates(
         res.data.data.filter(
-          (x: ActivityStateInterface) => x.activityId.type === "Civic"
+          (x: ActivityStateInterface) => x.activityId.type === "Duke"
         )
       );
     };
@@ -38,7 +38,7 @@ const CivicEngagements = () => {
             <div className="flex flex-wrap w-full mb-16">
               <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
-                  Civic Engagements
+                  Duke Of Edinburgh
                 </h1>
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
@@ -65,4 +65,4 @@ const CivicEngagements = () => {
   );
 };
 
-export default CivicEngagements;
+export default DukeOfEdinburgh;
