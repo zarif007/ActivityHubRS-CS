@@ -53,6 +53,15 @@ export default function Home() {
       </button>
       <button
         className={styles.button}
+        onClick={() => router.push("/amra-notun-network")}
+      >
+        <GiStairsGoal className="w-8 h-8 " />
+        <div>
+          <p>Amra Notun Network</p>
+        </div>
+      </button>
+      <button
+        className={styles.button}
         onClick={() => router.push("/duke-of-edinburgh")}
       >
         <GiStairsGoal className="w-8 h-8 " />
