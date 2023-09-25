@@ -69,7 +69,7 @@ const Activities = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <EnrollmentFeeDetails day={1} />
+            <EnrollmentFeeDetails day={2} />
             <div className="my-2 mb-6 flex items-end">
               <Input
                 className="mx-auto"
