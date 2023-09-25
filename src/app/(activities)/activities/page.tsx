@@ -27,26 +27,14 @@ const Activities = () => {
       );
       const res = await axios.get(`${apiEndpointV1}/activitystate`);
       setActivityStates(
-        res.data.data
-          .sort(
-            (a: ActivityStateInterface, b: ActivityStateInterface) =>
-              a.registrationDay - b.registrationDay
-          )
-          .filter(
-            (d: ActivityStateInterface) =>
-              d.registrationDay >= regInfo.data.data[0].registrationDay
-          )
+        res.data.data.filter(
+          (d: ActivityStateInterface) => d.registrationDay === 1
+        )
       );
       setFilteredActivityStates(
-        res.data.data
-          .sort(
-            (a: ActivityStateInterface, b: ActivityStateInterface) =>
-              a.registrationDay - b.registrationDay
-          )
-          .filter(
-            (d: ActivityStateInterface) =>
-              d.registrationDay >= regInfo.data.data[0].registrationDay
-          )
+        res.data.data.filter(
+          (d: ActivityStateInterface) => d.registrationDay === 1
+        )
       );
     };
     getData();
@@ -81,7 +69,7 @@ const Activities = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <EnrollmentFeeDetails day={10} />
+            <EnrollmentFeeDetails day={1} />
             <div className="my-2 mb-6 flex items-end">
               <Input
                 className="mx-auto"

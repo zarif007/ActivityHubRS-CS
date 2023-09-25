@@ -43,7 +43,7 @@ const DukeOfEdinburgh = () => {
                 <div className="h-1 w-20 bg-indigo-500 rounded"></div>
               </div>
             </div>
-            <EnrollmentFeeDetails day={1} />
+            <EnrollmentFeeDetails day={0} />
             <div className="flex flex-wrap -m-4">
               {activityStates.length > 0 &&
                 activityStates.map(

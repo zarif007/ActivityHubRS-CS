@@ -23,7 +23,7 @@ export default function Home() {
       >
         <GiStairsGoal className="w-8 h-8" />
         <div>
-          <p>View RS activities</p>
+          <p>View ELA activities</p>
         </div>
       </button>
       {/* <button
