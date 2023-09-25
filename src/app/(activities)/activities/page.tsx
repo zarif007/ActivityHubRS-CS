@@ -61,7 +61,7 @@ const Activities = () => {
       {filteredActivityStates ? (
         <section className="text-gray-400 body-font">
           <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap w-full mb-16">
+            <div className="flex flex-wrap w-full mb-8">
               <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
                   RS Activities
@@ -70,6 +70,9 @@ const Activities = () => {
               </div>
             </div>
             <EnrollmentFeeDetails day={2} />
+            <h1 className="text-center font-bold text-3xl text-indigo-500 my-3">
+              Enrollment starts from 9:00 AM to 11:00 PM.
+            </h1>
             <div className="my-2 mb-6 flex items-end">
               <Input
                 className="mx-auto"

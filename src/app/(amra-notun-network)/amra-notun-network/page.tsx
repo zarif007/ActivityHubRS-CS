@@ -30,8 +30,6 @@ const AmraNotunNetwork = () => {
   }, []);
   return (
     <div className="mt-16 md:mt-24 w-full max-w-7xl mx-auto bg-gray-900">
-      <AIActivitySuggestionModal />
-
       {activityStates ? (
         <section className="text-gray-400 body-font">
           <div className="container px-5 py-24 mx-auto">
@@ -44,6 +42,9 @@ const AmraNotunNetwork = () => {
               </div>
             </div>
             <EnrollmentFeeDetails day={3} />
+            <h1 className="text-center font-bold text-3xl text-indigo-500 my-3">
+              Enrollment starts from 9:00 AM to 11:00 PM.
+            </h1>
             <div className="flex flex-wrap -m-4">
               {activityStates.length > 0 &&
                 activityStates.map(
