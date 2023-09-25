@@ -2,7 +2,7 @@ import React from "react";
 
 const EnrollmentFeeDetails = ({ day }: { day: number }) => {
   const venue = "OB-Basement canteen";
-  const paymentDays = ["September 27, 2023 from 3pm to 5pm", "Link"];
+  const paymentDays = ["September 27, 2023 from 3pm to 5pm", "https://docs.google.com/spreadsheets/d/1rY_KU5eyBwaMP-_BKYc2147MLH-NL0Vt/edit#gid=1891669613"];
   const activityDayNames = ["Civic Engagement", "Activity Day 1"];
   return (
     <div className="w-fit p-2 border-2 border-indigo-500 mb-4 rounded">
